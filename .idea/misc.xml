@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/rudtj/Documents/GitHub/CAPs/app/src/main/res/layout-w1240dp/activity_login.xml" value="0.1288487282463186" />
+        <entry key="..\:/Users/rudtj/Documents/GitHub/CAPs/app/src/main/res/layout-w936dp/activity_login.xml" value="0.150390625" />
+        <entry key="..\:/Users/rudtj/Documents/GitHub/CAPs/app/src/main/res/layout/activity_login.xml" value="0.20052083333333334" />
         <entry key="..\:/Users/rudtj/Documents/GitHub/CAPs/app/src/main/res/layout/activity_main.xml" value="0.35989583333333336" />
       </map>
     </option>
