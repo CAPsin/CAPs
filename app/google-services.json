@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "675620750911",
+    "project_id": "gjsg-77b00",
+    "storage_bucket": "gjsg-77b00.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:675620750911:android:3d8cb3bdbaed9b9e7e9a8a",
+        "android_client_info": {
+          "package_name": "com.example.cpas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "675620750911-65jdev60qjd58vkr7g6jl981mevq52ug.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCF9NunhPrezVlZEpOjLFUbxux9lkQJPDk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "675620750911-65jdev60qjd58vkr7g6jl981mevq52ug.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
