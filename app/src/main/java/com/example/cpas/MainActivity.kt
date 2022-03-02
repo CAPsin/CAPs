@@ -29,6 +29,10 @@ class               MainActivity : AppCompatActivity(), NavigationView.OnNavigat
         val planner : Button = findViewById(R.id.btn_planner)
         val myInfo : Button = findViewById(R.id.btn_myInfo)
 
+        myInfo.setOnClickListener {
+            val intent = Intent(this,MyinfoActivity::class.java)
+            startActivity(intent)
+        }
         more.setOnClickListener {
             val drawer : DrawerLayout = findViewById(R.id.layout_drawer)
             drawer.openDrawer(GravityCompat.END)
