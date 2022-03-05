@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AssignActivity">
+
+    <TextView
+        android:id="@+id/AssTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="회원가입"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/AssNameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:text="이름 : "
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/AssTitle" />
+
+    <EditText
+        android:id="@+id/AssName"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/AssNameText"
+        app:layout_constraintTop_toBottomOf="@id/AssTitle" />
+
+    <TextView
+        android:id="@+id/AssEmailText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="30dp"
+        android:text="이메일 : "
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/AssNameText" />
+
+    <EditText
+        android:id="@+id/AssEmail"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toEndOf="@id/AssEmailText"
+        app:layout_constraintTop_toBottomOf="@id/AssNameText" />
+
+    <TextView
+        android:id="@+id/AssNickText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="30dp"
+        android:text="닉네임 : "
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/AssEmailText" />
+
+    <EditText
+        android:id="@+id/AssNick"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toEndOf="@id/AssNickText"
+        app:layout_constraintTop_toBottomOf="@+id/AssEmailText" />
+
+    <TextView
+        android:id="@+id/AssIdText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="30dp"
+        android:text="아이디 : "
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/AssNickText" />
+
+    <EditText
+        android:id="@+id/AssId"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toEndOf="@id/AssIdText"
+        app:layout_constraintTop_toBottomOf="@+id/AssNick" />
+
+    <TextView
+        android:id="@+id/AssPassText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="44dp"
+        android:text="비밀번호 : "
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/AssIdText" />
+
+    <EditText
+        android:id="@+id/AssPass"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toEndOf="@id/AssPassText"
+        app:layout_constraintTop_toBottomOf="@+id/AssId" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Assignbtn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="가입"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

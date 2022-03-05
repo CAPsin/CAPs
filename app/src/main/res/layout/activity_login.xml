@@ -51,17 +51,27 @@
     </EditText>
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/LoginButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/LoginButton"
         android:text="Login"
-        app:layout_constraintTop_toBottomOf="@id/EditPassword"
-        app:layout_constraintVertical_bias="0.1"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        >
-    </androidx.appcompat.widget.AppCompatButton>
+        app:layout_constraintHorizontal_bias="0.297"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/EditPassword"
+        app:layout_constraintVertical_bias="0.102"></androidx.appcompat.widget.AppCompatButton>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/AssignButton"
+        android:text="회원가입"
+        app:layout_constraintTop_toBottomOf="@id/EditPassword"
+        app:layout_constraintStart_toEndOf="@id/LoginButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.1"/>
 
 
 
