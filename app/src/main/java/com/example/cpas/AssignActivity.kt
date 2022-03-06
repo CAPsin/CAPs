@@ -4,17 +4,25 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
 
 class AssignActivity : AppCompatActivity() {
-    private var auth = FirebaseAuth.getInstance()
+    private lateinit var auth : FirebaseAuth
+    private lateinit var databaseReference: DatabaseReference
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_assign)
-        val database : FirebaseDatabase = FirebaseDatabase.getInstance()
+        auth = FirebaseAuth.getInstance()
+
+        var mContext = this
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("Users")
 
         val assignbtn = findViewById<AppCompatButton>(R.id.Assignbtn)
         val assname = findViewById<EditText>(R.id.AssName)
@@ -25,6 +33,18 @@ class AssignActivity : AppCompatActivity() {
 
         assignbtn.setOnClickListener{
             //TODO 파이어베이스에 데이터 저장
+            auth!!.createUserWithEmailAndPassword(assemail.text.toString(), asspass.text.toString())
+                .addOnCompleteListener(this){
+                    if(it.isSuccessful){
+                        Toast.makeText(mContext, "로그인 성공", Toast.LENGTH_SHORT)
+                        var userprofile = User(assname.text.toString(), assemail.text.toString(), assnick.text.toString(), assid.text.toString(), asspass.text.toString())
+                        databaseReference.child(auth.uid.toString()).setValue(userprofile)
+                    }
+                    else{
+                        Toast.makeText(mContext, "로그인 실패", Toast.LENGTH_SHORT)
+                    }
+                }
+
         }
     }
 }
