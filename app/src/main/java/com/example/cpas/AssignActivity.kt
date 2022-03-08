@@ -13,7 +13,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
 
 class AssignActivity : AppCompatActivity() {
-    private lateinit var auth : FirebaseAuth
+    private lateinit var auth : FirebaseAuth // 파이어 베이스 형식
     private lateinit var databaseReference: DatabaseReference
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
