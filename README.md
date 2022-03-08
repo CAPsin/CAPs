@@ -1,1 +1,2 @@
 # CAPs
+Friend team project
