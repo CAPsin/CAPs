@@ -10,11 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
-            android:name=".AssignActivity"
-            android:exported="true" />
-        <!-- android:theme="@style/Theme.Cpas"> -->
-        <activity
-            android:name=".LoginActivity"
+            android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,8 +19,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".AssignActivity"
+            android:exported="true" /> <!-- android:theme="@style/Theme.Cpas"> -->
+        <activity
+            android:name=".LoginActivity"
             android:exported="true"></activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="true" />
         <activity android:name=".MyinfoActivity" />
     </application>
 
