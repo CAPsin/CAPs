@@ -20,7 +20,6 @@ class AssignActivity : AppCompatActivity() {
         setContentView(R.layout.activity_assign)
         auth = FirebaseAuth.getInstance()
 
-        var mContext = this
 
         databaseReference = FirebaseDatabase.getInstance().getReference("Users")
 
@@ -36,12 +35,12 @@ class AssignActivity : AppCompatActivity() {
             auth!!.createUserWithEmailAndPassword(assemail.text.toString(), asspass.text.toString())
                 .addOnCompleteListener(this){
                     if(it.isSuccessful){
-                        Toast.makeText(mContext, "로그인 성공", Toast.LENGTH_SHORT)
+                        //파이어 베이스에 유저 기본 정보 저장
                         var userprofile = User(assname.text.toString(), assemail.text.toString(), assnick.text.toString(), assid.text.toString(), asspass.text.toString())
                         databaseReference.child(auth.uid.toString()).setValue(userprofile)
                     }
                     else{
-                        Toast.makeText(mContext, "로그인 실패", Toast.LENGTH_SHORT)
+                        //TODO 실패시 해야 할 일.
                     }
                 }
 
