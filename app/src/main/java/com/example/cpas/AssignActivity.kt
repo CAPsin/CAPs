@@ -1,5 +1,6 @@
 package com.example.cpas
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -38,9 +39,18 @@ class AssignActivity : AppCompatActivity() {
                         //파이어 베이스에 유저 기본 정보 저장
                         var userprofile = User(assname.text.toString(), assemail.text.toString(), assnick.text.toString(), assid.text.toString(), asspass.text.toString())
                         databaseReference.child(auth.uid.toString()).setValue(userprofile)
+                        val intent = Intent(this, LoginActivity::class.java)
+                        intent.putExtra("email", assemail.text.toString())
+                        intent.putExtra("id", assid.text.toString())
+                        intent.putExtra("name", assname.text.toString())
+                        intent.putExtra("nickname", assnick.text.toString())
+                        intent.putExtra("password", asspass.text.toString())
+                        startActivity(intent)
+                        finish()
                     }
                     else{
                         //TODO 실패시 해야 할 일.
+                        Toast.makeText(this, "가입 실패", Toast.LENGTH_SHORT).show()
                     }
                 }
 
