@@ -34,6 +34,10 @@ class LoginActivity : AppCompatActivity() {
 
             Log.d("tag1", inputid.text.toString().equals(user_id).toString())
             Log.d("tag1", inputpass.text.toString().equals(user_password).toString())
+            //Toast.makeText(this, user_id.toString(), Toast.LENGTH_SHORT).show()
+            //Toast.makeText(this, user_password.toString(), Toast.LENGTH_SHORT).show()
+            //inputid.setText(user_id.toString())
+            //inputpass.setText(user_password.toString())
             if(inputid.text.toString().equals(user_id) && inputpass.text.toString().equals(user_password)){
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)

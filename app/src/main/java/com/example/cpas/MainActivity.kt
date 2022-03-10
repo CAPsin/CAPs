@@ -1,7 +1,6 @@
 package com.example.cpas
 
 import android.content.Intent
-import android.media.Image
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
@@ -14,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.navigation.NavigationView
 
-class               MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -40,26 +39,25 @@ class               MainActivity : AppCompatActivity(), NavigationView.OnNavigat
         val nav : NavigationView = findViewById(R.id.naviView)
         nav.setNavigationItemSelectedListener(this)
 
-        val tmp  = arrayListOf<Posting>(
-            Posting("제목", "미리 보기", "1분 전", "3", R.drawable.comment),
-            Posting("제목", "미리 보기", "1분 전", "3", R.drawable.comment),
-            Posting("제목", "미리 보기", "1분 전", "3", R.drawable.comment),
-            Posting("제목", "미리 보기", "1분 전", "3", R.drawable.comment),
-            Posting("제목", "미리 보기", "1분 전", "3", R.drawable.comment),
-            Posting("제목", "미리 보기", "1분 전", "3", R.drawable.comment),
-            Posting("제목", "미리 보기", "1분 전", "3", R.drawable.comment),
-            Posting("제목", "미리 보기", "1분 전", "3", R.drawable.comment),
-            Posting("제목", "미리 보기", "1분 전", "3", R.drawable.comment),
-            Posting("제목", "미리 보기", "1분 전", "3", R.drawable.comment),
-            Posting("제목", "미리 보기", "1분 전", "3", R.drawable.comment),
-            Posting("제목", "미리 보기", "1분 전", "3", R.drawable.comment),
-            Posting("제목", "미리 보기", "1분 전", "3", R.drawable.comment),
-            Posting("제목", "미리 보기", "1분 전", "3", R.drawable.comment)
-        )
-        val rv : RecyclerView = findViewById(R.id.rv_posting)
-        rv.layoutManager = LinearLayoutManager(this)
-        rv.setHasFixedSize(true)
-        rv.adapter = PostingAdapter(tmp)
+        val job : Button = findViewById(R.id.btn_job)
+        val normal : Button = findViewById(R.id.btn_normal)
+
+        setFrag(0)
+
+        job.setOnClickListener { setFrag(0) }
+        normal.setOnClickListener { setFrag(1) }
+    }
+
+    private fun setFrag(fragNum : Int) {
+        val ft = supportFragmentManager.beginTransaction()
+        when(fragNum) {
+            0 -> {
+                ft.replace(R.id.main_frame, JobFragment()).commit()
+            }
+            1 -> {
+                ft.replace(R.id.main_frame, NormalFragment()).commit()
+            }
+        }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
