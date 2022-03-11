@@ -130,7 +130,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btn_write"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="글쓰기"
@@ -143,9 +143,9 @@
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/naviView"
-        android:layout_width="wrap_content"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-        app:menu="@menu/nav_menu"/>
+        app:menu="@menu/nav_menu" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+    var flag : String = "job"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -39,6 +40,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val nav : NavigationView = findViewById(R.id.naviView)
         nav.setNavigationItemSelectedListener(this)
 
+        val write : Button = findViewById(R.id.btn_write)
+        write.setOnClickListener {
+            val intent1 = Intent(this, WritingActivity::class.java)
+            intent1.putExtra("flag", flag)
+            intent1.putExtra("id", intent.getStringExtra("id"))
+            intent1.putExtra("who", intent.getStringExtra("who"))
+            startActivity(intent1)
+        }
+
         val job : Button = findViewById(R.id.btn_job)
         val normal : Button = findViewById(R.id.btn_normal)
 
@@ -53,9 +63,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when(fragNum) {
             0 -> {
                 ft.replace(R.id.main_frame, JobFragment()).commit()
+                flag = "job"
             }
             1 -> {
                 ft.replace(R.id.main_frame, NormalFragment()).commit()
+                flag = "normal"
             }
         }
     }
