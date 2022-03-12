@@ -18,6 +18,7 @@ class PostingAdapter(val postingList:ArrayList<Posting>) : Adapter<PostingAdapte
         val time = itemView.findViewById<TextView>(R.id.tv_time)
         val commentNum = itemView.findViewById<TextView>(R.id.tv_commentNum)
         val commentImage = itemView.findViewById<ImageView>(R.id.iv_comment)
+        val who = itemView.findViewById<TextView>(R.id.tv_who)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostingAdapter.CustomViewHolder {
@@ -31,6 +32,7 @@ class PostingAdapter(val postingList:ArrayList<Posting>) : Adapter<PostingAdapte
         holder.time.text = postingList.get(position).time
         holder.commentNum.text = postingList.get(position).commentNum
         holder.commentImage.setImageResource(postingList.get(position).commentImage)
+        holder.who.text = postingList.get(position).who
     }
 
     override fun getItemCount(): Int {
