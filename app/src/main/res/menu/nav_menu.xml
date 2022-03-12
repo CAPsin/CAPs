@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
-        <item android:id="@+id/tmp1"
-            android:title="임시1"/>
+        <item
+            android:id="@+id/tmp1"
+            android:title="글쓰기" />
 
         <item android:id="@+id/tmp2"
             android:title="임시2"/>

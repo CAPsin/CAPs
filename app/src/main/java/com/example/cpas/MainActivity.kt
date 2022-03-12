@@ -1,5 +1,6 @@
 package com.example.cpas
 
+import android.content.ClipData
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,6 +8,7 @@ import android.view.MenuItem
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.view.menu.MenuView
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,7 +30,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val comunity : Button = findViewById(R.id.btn_comunity)
         val planner : Button = findViewById(R.id.btn_planner)
         val myInfo : Button = findViewById(R.id.btn_myInfo)
-
+        
         myInfo.setOnClickListener {
             val intent = Intent(this,MyinfoActivity::class.java)
             startActivity(intent)
@@ -37,8 +39,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             val drawer : DrawerLayout = findViewById(R.id.layout_drawer)
             drawer.openDrawer(GravityCompat.END)
         }
+        category.setOnClickListener {
+            val drawer : DrawerLayout = findViewById(R.id.layout_drawer)
+            drawer.openDrawer(GravityCompat.START)
+        }
         val nav : NavigationView = findViewById(R.id.naviView)
         nav.setNavigationItemSelectedListener(this)
+
+        val nav_category :NavigationView = findViewById(R.id.navi_category)
+        nav_category.setNavigationItemSelectedListener(this)
 
         val write : Button = findViewById(R.id.btn_write)
         write.setOnClickListener {
@@ -48,7 +57,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             intent1.putExtra("who", intent.getStringExtra("who"))
             startActivity(intent1)
         }
-
         val job : Button = findViewById(R.id.btn_job)
         val normal : Button = findViewById(R.id.btn_normal)
 
@@ -71,14 +79,19 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
         }
     }
-
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
-            R.id.tmp1 -> Toast.makeText(applicationContext, "임시", Toast.LENGTH_SHORT).show()
+        when(item.itemId){
+            R.id.tmp1 -> {
+                val intent1 = Intent(this, WritingActivity::class.java)
+                intent1.putExtra("flag", flag)
+                intent1.putExtra("id", intent.getStringExtra("id"))
+                intent1.putExtra("who", intent.getStringExtra("who"))
+                startActivity(intent1)
+                Toast.makeText(applicationContext, "글쓰기", Toast.LENGTH_SHORT).show()
+            }
             R.id.tmp2 -> Toast.makeText(applicationContext, "임시", Toast.LENGTH_SHORT).show()
             R.id.tmp3 -> Toast.makeText(applicationContext, "임시", Toast.LENGTH_SHORT).show()
         }
-
         val drawer : DrawerLayout = findViewById(R.id.layout_drawer)
         drawer.closeDrawers()
 
@@ -87,7 +100,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onBackPressed() {
         val drawer : DrawerLayout = findViewById(R.id.layout_drawer)
-        if(drawer.isDrawerOpen(GravityCompat.END)) {
+        if(drawer.isDrawerOpen(GravityCompat.END)||drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawers()
         }
         else {
