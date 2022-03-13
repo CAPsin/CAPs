@@ -1,13 +1,15 @@
 package com.example.cpas
 
 import android.content.ClipData
+import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.MenuItem
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.Toast
+import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.view.menu.MenuView
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -22,10 +24,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setContentView(R.layout.activity_main)
         //코드작성 예시
         //테스트2
-
         val search : ImageView = findViewById(R.id.iv_search)
         val more : ImageView = findViewById(R.id.iv_more)
         val category : ImageView = findViewById(R.id.iv_category)
+        val text1 : TextView = findViewById(R.id.textView13)
 
         val comunity : Button = findViewById(R.id.btn_comunity)
         val planner : Button = findViewById(R.id.btn_planner)
@@ -40,14 +42,22 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             drawer.openDrawer(GravityCompat.END)
         }
         category.setOnClickListener {
-            val drawer : DrawerLayout = findViewById(R.id.layout_drawer)
-            drawer.openDrawer(GravityCompat.START)
+            val alert = AlertDialog.Builder(this)
+            alert.setTitle("카테고리 추가")
+            alert.setMessage("원하시는 카테고리를 추가하십시오")
+            val edittext = EditText(this)
+
+            alert.setPositiveButton("추가") {
+                dialog, which -> Toast.makeText(applicationContext, "추가되었습니다",Toast.LENGTH_LONG).show()
+            }
+            alert.setNeutralButton("취소",null)
+            
+            alert.setView(edittext)
+            alert.create()
+            alert.show()
         }
         val nav : NavigationView = findViewById(R.id.naviView)
         nav.setNavigationItemSelectedListener(this)
-
-        val nav_category :NavigationView = findViewById(R.id.navi_category)
-        nav_category.setNavigationItemSelectedListener(this)
 
         val write : Button = findViewById(R.id.btn_write)
         write.setOnClickListener {
