@@ -50,6 +50,8 @@ class NormalFragment : Fragment() {
         rv.setHasFixedSize(true)
         rv.adapter = PostingAdapter(array)
 
+
+
         return view
     }
 

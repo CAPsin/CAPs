@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
+            android:name=".InPosting"
+            android:exported="true" />
+        <activity
             android:name=".WritingActivity"
             android:exported="false" />
         <activity
