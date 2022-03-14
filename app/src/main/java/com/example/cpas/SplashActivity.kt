@@ -26,7 +26,9 @@ class SplashActivity : AppCompatActivity() {
         databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(auth.uid.toString())
 
         if(auth.uid == null){
-            nextActivity()
+            val intent = Intent(this@SplashActivity, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
         }
         else{
             databaseReference.addValueEventListener(object : ValueEventListener {
@@ -48,7 +50,7 @@ class SplashActivity : AppCompatActivity() {
     }
 
     fun nextActivity(){
-        val intent = Intent(this@SplashActivity, LoginActivity::class.java)
+        val intent = Intent(this@SplashActivity, MainActivity::class.java)
         intent.putExtra("email", userInfoArr[email])
         intent.putExtra("id", userInfoArr[id])
         intent.putExtra("name", userInfoArr[name])
