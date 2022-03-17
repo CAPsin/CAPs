@@ -1,14 +1,15 @@
 package com.example.cpas
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import java.lang.System.currentTimeMillis
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -42,18 +43,20 @@ class WritingActivity : AppCompatActivity() {
                 val tmp2 : String = content.text.toString()
                 val sdf = SimpleDateFormat("yyyy/MM/dd hh:mm:ss")
                 val time : String = sdf.format(Date())
-                val commentNum : Int = 0
+
+//                Toast.makeText(applicationContext, Date().time.toString(), Toast.LENGTH_SHORT).show()
+                val commentNum = "0"
                 val who : String? = intent.getStringExtra("who")
 
                 database = FirebaseDatabase.getInstance().getReference("Postings")
-                val posting = Postings(id, type, tmp, tmp2, time, commentNum, who)
-
-                database.child((auth.uid.toString()+Date())!!).setValue(posting).addOnSuccessListener {
+                val posting = Posting(id, type, tmp, tmp2, time, commentNum, who, R.drawable.comment, currentTimeMillis().toString())
+                database.child((id+"@"+Date())).setValue(posting).addOnSuccessListener {
                     Toast.makeText(applicationContext, "글을 업로드 하였습니다", Toast.LENGTH_SHORT).show()
                     finish()
                 }.addOnFailureListener {
                     Toast.makeText(applicationContext, "업로드에 실패 했습니다", Toast.LENGTH_SHORT).show()
                 }
+
             }
         }
 

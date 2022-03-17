@@ -48,9 +48,8 @@
 
         <EditText
             android:id="@+id/et_title"
-            android:layout_width="390dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:hint="제목"
             android:maxLength="25"
             android:inputType="textPersonName"
@@ -62,7 +61,7 @@
 
         <EditText
             android:id="@+id/et_content"
-            android:layout_width="390dp"
+            android:layout_width="match_parent"
             android:layout_height="400dp"
             android:layout_marginTop="16dp"
             android:background="@android:color/transparent"

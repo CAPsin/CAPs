@@ -1,10 +1,7 @@
 package com.example.cpas
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
-import android.os.Parcel
-import android.os.Parcelable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +11,6 @@ import android.widget.TextView
 import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
-import androidx.recyclerview.widget.RecyclerView.combineMeasuredStates
 
 class PostingAdapter(val postingList:ArrayList<Posting>) : Adapter<PostingAdapter.CustomViewHolder>() {
 
@@ -35,7 +31,14 @@ class PostingAdapter(val postingList:ArrayList<Posting>) : Adapter<PostingAdapte
 
     override fun onBindViewHolder(holder: PostingAdapter.CustomViewHolder, position: Int) {
         holder.title.text = postingList.get(position).title
-        holder.contentPreview.text = postingList.get(position).contentPreview
+        var preView = postingList.get(position).content.replace('\n',' ')
+        when {
+            preView.length > 46 -> {
+                val tmp = preView.substring(0..45) + ".."
+                holder.contentPreview.text = tmp
+            }
+            else -> holder.contentPreview.text = preView
+        }
         holder.time.text = postingList.get(position).time
         holder.commentNum.text = postingList.get(position).commentNum
         holder.commentImage.setImageResource(postingList.get(position).commentImage)
@@ -46,7 +49,8 @@ class PostingAdapter(val postingList:ArrayList<Posting>) : Adapter<PostingAdapte
             val intent = Intent(holder.itemView.context, InPosting::class.java)
             intent.putExtra("ptitle", postingList[position].title)
             intent.putExtra("ptime", postingList[position].time)
-            intent.putExtra("pcontent", postingList[position].contentPreview)
+            //intent.putExtra("pcontent", postingList[position].contentPreview)
+            intent.putExtra("pcontent", postingList[position].content)
             intent.putExtra("pwho", postingList[position].who)
             startActivityForResult(holder.itemView.context as Activity,intent,101,null)
 
