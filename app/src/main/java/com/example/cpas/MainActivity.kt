@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             drawer.openDrawer(GravityCompat.END)
         }
         planner.setOnClickListener {
-            val intent = Intent(this,MyinfoActivity::class.java)
+            val intent = Intent(this,PlannerActivity::class.java)
             startActivity(intent)
         }
         category.setOnClickListener {
