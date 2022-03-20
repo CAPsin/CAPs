@@ -7,14 +7,18 @@
         <entry key="..\:/Users/82103/Documents/GitHub/app/src/main/res/drawable/ic_baseline_more_vert_45.xml" value="0.14" />
         <entry key="..\:/Users/82103/Documents/GitHub/app/src/main/res/drawable/ic_baseline_search_45.xml" value="0.14" />
         <entry key="..\:/Users/82103/Documents/GitHub/app/src/main/res/layout/activity_assign.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/82103/Documents/GitHub/app/src/main/res/layout/activity_in_posting.xml" value="0.264" />
         <entry key="..\:/Users/82103/Documents/GitHub/app/src/main/res/layout/activity_login.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/82103/Documents/GitHub/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/82103/Documents/GitHub/app/src/main/res/layout/activity_myinfo.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/82103/Documents/GitHub/app/src/main/res/layout/activity_splash.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/82103/Documents/GitHub/app/src/main/res/layout/activity_test.xml" value="0.2390625" />
         <entry key="..\:/Users/82103/Documents/GitHub/app/src/main/res/layout/activity_writing.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/82103/Documents/GitHub/app/src/main/res/layout/comment_item.xml" value="0.5251798561151079" />
         <entry key="..\:/Users/82103/Documents/GitHub/app/src/main/res/layout/job_fragment.xml" value="0.24974358974358973" />
-        <entry key="..\:/Users/82103/Documents/GitHub/app/src/main/res/layout/list_item.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/82103/Documents/GitHub/app/src/main/res/layout/list_item.xml" value="0.4" />
         <entry key="..\:/Users/82103/Documents/GitHub/app/src/main/res/layout/normal_fragment.xml" value="0.24974358974358973" />
+        <entry key="..\:/Users/82103/Documents/GitHub/app/src/main/res/layout/tmp.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/82103/Documents/GitHub/app/src/main/res/menu/nav_menu.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/rudtj/Documents/GitHub/CAPs/app/src/main/res/layout-w1240dp/activity_login.xml" value="0.1288487282463186" />
         <entry key="..\:/Users/rudtj/Documents/GitHub/CAPs/app/src/main/res/layout-w936dp/activity_login.xml" value="0.150390625" />

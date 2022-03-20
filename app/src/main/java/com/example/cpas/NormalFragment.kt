@@ -1,9 +1,12 @@
 package com.example.cpas
 
+import android.app.ActionBar
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,7 +16,7 @@ import java.util.*
 import kotlin.Comparator
 import kotlin.collections.ArrayList
 
-class NormalFragment : Fragment() {
+class NormalFragment(val who : String, val id : String) : Fragment() {
 
     private lateinit var database : DatabaseReference
     private lateinit var array : ArrayList<Posting>
@@ -37,8 +40,9 @@ class NormalFragment : Fragment() {
                         val image = R.drawable.comment
                         val who = data.child("who").value as String
                         val epoch = data.child("epoch").value as String
+                        val postingID = data.child("postingID").value as String
 
-                        array.add(Posting(id, "normal", title, content, time, commentNum.toString(), who, image, epoch))
+                        array.add(Posting(id, "normal", title, content, time, commentNum.toString(), who, image, epoch, postingID))
                     }
                 }
                 if(array.size > 1) {
@@ -54,7 +58,7 @@ class NormalFragment : Fragment() {
 
         rv.layoutManager = LinearLayoutManager(null)
         rv.setHasFixedSize(true)
-        rv.adapter = PostingAdapter(array)
+        rv.adapter = PostingAdapter(array, who, id)
 
         return view
     }

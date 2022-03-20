@@ -12,7 +12,7 @@ import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 
-class PostingAdapter(val postingList:ArrayList<Posting>) : Adapter<PostingAdapter.CustomViewHolder>() {
+class PostingAdapter(val postingList:ArrayList<Posting>, val who : String, val id : String) : Adapter<PostingAdapter.CustomViewHolder>() {
 
 
     inner class CustomViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -52,8 +52,10 @@ class PostingAdapter(val postingList:ArrayList<Posting>) : Adapter<PostingAdapte
             //intent.putExtra("pcontent", postingList[position].contentPreview)
             intent.putExtra("pcontent", postingList[position].content)
             intent.putExtra("pwho", postingList[position].who)
+            intent.putExtra("pID", postingList[position].postingID)
+            intent.putExtra("cWho", who)
+            intent.putExtra("cID", id)
             startActivityForResult(holder.itemView.context as Activity,intent,101,null)
-
         }
     }
 

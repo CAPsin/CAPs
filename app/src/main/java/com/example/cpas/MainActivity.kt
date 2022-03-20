@@ -74,17 +74,19 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         job.setOnClickListener { setFrag(0) }
         normal.setOnClickListener { setFrag(1) }
+
+
     }
 
     private fun setFrag(fragNum : Int) {
         val ft = supportFragmentManager.beginTransaction()
         when(fragNum) {
             0 -> {
-                ft.replace(R.id.main_frame, JobFragment()).commit()
+                ft.replace(R.id.main_frame, JobFragment(intent.getStringExtra("who")!!, intent.getStringExtra("id")!!)).commit()
                 flag = "job"
             }
             1 -> {
-                ft.replace(R.id.main_frame, NormalFragment()).commit()
+                ft.replace(R.id.main_frame, NormalFragment(intent.getStringExtra("who")!!, intent.getStringExtra("id")!!)).commit()
                 flag = "normal"
             }
         }

@@ -43,14 +43,14 @@ class WritingActivity : AppCompatActivity() {
                 val tmp2 : String = content.text.toString()
                 val sdf = SimpleDateFormat("yyyy/MM/dd hh:mm:ss")
                 val time : String = sdf.format(Date())
-
+                val postingID = id + "@" + Date()
 //                Toast.makeText(applicationContext, Date().time.toString(), Toast.LENGTH_SHORT).show()
                 val commentNum = "0"
                 val who : String? = intent.getStringExtra("who")
 
                 database = FirebaseDatabase.getInstance().getReference("Postings")
-                val posting = Posting(id, type, tmp, tmp2, time, commentNum, who, R.drawable.comment, currentTimeMillis().toString())
-                database.child((id+"@"+Date())).setValue(posting).addOnSuccessListener {
+                val posting = Posting(id, type, tmp, tmp2, time, commentNum, who, R.drawable.comment, currentTimeMillis().toString(), postingID)
+                database.child(postingID).setValue(posting).addOnSuccessListener {
                     Toast.makeText(applicationContext, "글을 업로드 하였습니다", Toast.LENGTH_SHORT).show()
                     finish()
                 }.addOnFailureListener {

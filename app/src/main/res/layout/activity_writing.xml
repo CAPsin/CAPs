@@ -62,13 +62,14 @@
         <EditText
             android:id="@+id/et_content"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="0dp"
             android:layout_marginTop="16dp"
             android:background="@android:color/transparent"
             android:ems="10"
             android:gravity="top"
             android:hint="내용을 입력하세요"
             android:inputType="textMultiLine"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/et_title" />
