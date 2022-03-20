@@ -41,6 +41,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             val drawer : DrawerLayout = findViewById(R.id.layout_drawer)
             drawer.openDrawer(GravityCompat.END)
         }
+        planner.setOnClickListener {
+            val intent = Intent(this,MyinfoActivity::class.java)
+            startActivity(intent)
+        }
         category.setOnClickListener {
             val alert = AlertDialog.Builder(this)
             alert.setTitle("카테고리 추가")
