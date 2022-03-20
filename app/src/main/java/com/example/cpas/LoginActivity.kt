@@ -37,7 +37,7 @@ class LoginActivity : AppCompatActivity() {
             if(inputid.text.toString().equals(user_id) && inputpass.text.toString().equals(user_password)){
                 val intent = Intent(this, MainActivity::class.java)
                 intent.putExtra("id", inputid.text.toString())
-                intent.putExtra("who", user_nickname)
+                intent.putExtra("nickname", user_nickname)
                 startActivity(intent)
                 finish()
             }

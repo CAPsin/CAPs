@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             val intent1 = Intent(this, WritingActivity::class.java)
             intent1.putExtra("flag", flag)
             intent1.putExtra("id", intent.getStringExtra("id"))
-            intent1.putExtra("who", intent.getStringExtra("who"))
+            intent1.putExtra("who", intent.getStringExtra("nickname"))
             startActivity(intent1)
         }
         val job : Button = findViewById(R.id.btn_job)
@@ -82,11 +82,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val ft = supportFragmentManager.beginTransaction()
         when(fragNum) {
             0 -> {
-                ft.replace(R.id.main_frame, JobFragment(intent.getStringExtra("who")!!, intent.getStringExtra("id")!!)).commit()
+                ft.replace(R.id.main_frame, JobFragment(intent.getStringExtra("nickname")!!, intent.getStringExtra("id")!!)).commit()
                 flag = "job"
             }
             1 -> {
-                ft.replace(R.id.main_frame, NormalFragment(intent.getStringExtra("who")!!, intent.getStringExtra("id")!!)).commit()
+                ft.replace(R.id.main_frame, NormalFragment(intent.getStringExtra("nickname")!!, intent.getStringExtra("id")!!)).commit()
                 flag = "normal"
             }
         }
@@ -97,7 +97,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 val intent1 = Intent(this, WritingActivity::class.java)
                 intent1.putExtra("flag", flag)
                 intent1.putExtra("id", intent.getStringExtra("id"))
-                intent1.putExtra("who", intent.getStringExtra("who"))
+                intent1.putExtra("who", intent.getStringExtra("nickname"))
                 startActivity(intent1)
                 Toast.makeText(applicationContext, "글쓰기", Toast.LENGTH_SHORT).show()
             }
