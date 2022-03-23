@@ -75,14 +75,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             alert.setTitle("카테고리 추가")
             alert.setMessage("원하시는 카테고리를 추가하십시오")
             val edittext = EditText(this)
-            val category_text = Button(this) //카테고리 추가 (텍스트가 들어가는지 확인하려고 버튼으로 설정함)
+            val category_text = TextView(this) //카테고리 추가 (텍스트가 들어가는지 확인하려고 버튼으로 설정함)
 
-            category_text.text = edittext.text.toString() //글씨 왜 안들어가는지 모르겠음 ;;;
-            category_text.setTextSize(10F)
-            category_text.setTextColor(Color.BLACK)
 
             alert.setPositiveButton("추가") {
                 dialog, which -> Toast.makeText(applicationContext, "추가되었습니다",Toast.LENGTH_LONG).show()
+                category_text.text = edittext.text.toString() //글씨 왜 안들어가는지 모르겠음 ;;;
+                category_text.setTextSize(10F)
+                category_text.setTextColor(Color.BLACK)
                 category_line.addView(category_text)
             }
             alert.setNeutralButton("취소",null)
