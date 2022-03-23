@@ -4,10 +4,14 @@ import android.content.ClipData
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MenuItem
+import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.view.menu.MenuView
@@ -19,6 +23,8 @@ import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     var flag : String = "job"
+    var isUp = false // 카테고리 애니메이션 상태표시
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -27,12 +33,31 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val search : ImageView = findViewById(R.id.iv_search)
         val more : ImageView = findViewById(R.id.iv_more)
         val category : ImageView = findViewById(R.id.iv_category)
-        val text1 : TextView = findViewById(R.id.textView13)
+        val category_plus : ImageButton = findViewById(R.id.btn_cateplus) //카테고리 플러스 버튼
+        val category_line : LinearLayout = findViewById(R.id.category_line) //카테고리 삽입하기 위한 부모 레이어
 
+        val category_scollview : HorizontalScrollView = findViewById(R.id.scollview) //카테고리 숨겨진 페이지
         val comunity : Button = findViewById(R.id.btn_comunity)
         val planner : Button = findViewById(R.id.btn_planner)
         val myInfo : Button = findViewById(R.id.btn_myInfo)
+
+        val tranlateDownAnim : Animation // 카테고리 보여주는 애니메이션
+        val tranlateUpAnim : Animation // 카테고리 숨기는 애니매이션
+
+        tranlateDownAnim = AnimationUtils.loadAnimation(this,R.anim.translate_down);
+        tranlateUpAnim = AnimationUtils.loadAnimation(this,R.anim.translate_up);
         
+        category.setOnClickListener {//클릭시 애니메이션 작동 함수
+            if(isUp){
+                category_scollview.visibility = View.GONE
+                category_scollview.startAnimation(tranlateUpAnim)
+            }
+            else{
+                category_scollview.startAnimation(tranlateDownAnim)
+                category_scollview.visibility = View.VISIBLE
+            }
+            isUp = !isUp
+        }
         myInfo.setOnClickListener {
             val intent = Intent(this,MyinfoActivity::class.java)
             startActivity(intent)
@@ -45,17 +70,23 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             val intent = Intent(this,PlannerActivity::class.java)
             startActivity(intent)
         }
-        category.setOnClickListener {
+        category_plus.setOnClickListener {
             val alert = AlertDialog.Builder(this)
             alert.setTitle("카테고리 추가")
             alert.setMessage("원하시는 카테고리를 추가하십시오")
             val edittext = EditText(this)
+            val category_text = Button(this) //카테고리 추가 (텍스트가 들어가는지 확인하려고 버튼으로 설정함)
+
+            category_text.text = edittext.text.toString() //글씨 왜 안들어가는지 모르겠음 ;;;
+            category_text.setTextSize(10F)
+            category_text.setTextColor(Color.BLACK)
 
             alert.setPositiveButton("추가") {
                 dialog, which -> Toast.makeText(applicationContext, "추가되었습니다",Toast.LENGTH_LONG).show()
+                category_line.addView(category_text)
             }
             alert.setNeutralButton("취소",null)
-            
+
             alert.setView(edittext)
             alert.create()
             alert.show()
