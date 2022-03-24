@@ -19,9 +19,14 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationBarView
 import com.google.android.material.navigation.NavigationView
+import com.google.android.material.tabs.TabLayout
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
     var flag : String = "job"
     var isUp = false // 카테고리 애니메이션 상태표시
 
@@ -37,9 +42,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val category_line : LinearLayout = findViewById(R.id.category_line) //카테고리 삽입하기 위한 부모 레이어
 
         val category_scollview : HorizontalScrollView = findViewById(R.id.scollview) //카테고리 숨겨진 페이지
-        val comunity : Button = findViewById(R.id.btn_comunity)
-        val planner : Button = findViewById(R.id.btn_planner)
-        val myInfo : Button = findViewById(R.id.btn_myInfo)
 
         val tranlateDownAnim : Animation // 카테고리 보여주는 애니메이션
         val tranlateUpAnim : Animation // 카테고리 숨기는 애니매이션
@@ -58,17 +60,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             isUp = !isUp
         }
-        myInfo.setOnClickListener {
-            val intent = Intent(this,MyinfoActivity::class.java)
-            startActivity(intent)
-        }
         more.setOnClickListener {
             val drawer : DrawerLayout = findViewById(R.id.layout_drawer)
             drawer.openDrawer(GravityCompat.END)
-        }
-        planner.setOnClickListener {
-            val intent = Intent(this,PlannerActivity::class.java)
-            startActivity(intent)
         }
         category_plus.setOnClickListener {
             val alert = AlertDialog.Builder(this)
@@ -94,23 +88,26 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val nav : NavigationView = findViewById(R.id.naviView)
         nav.setNavigationItemSelectedListener(this)
 
-        val write : Button = findViewById(R.id.btn_write)
-        write.setOnClickListener {
-            val intent1 = Intent(this, WritingActivity::class.java)
-            intent1.putExtra("flag", flag)
-            intent1.putExtra("id", intent.getStringExtra("id"))
-            intent1.putExtra("who", intent.getStringExtra("nickname"))
-            startActivity(intent1)
-        }
-        val job : Button = findViewById(R.id.btn_job)
-        val normal : Button = findViewById(R.id.btn_normal)
+//        val job : Button = findViewById(R.id.btn_job)
+//        val normal : Button = findViewById(R.id.btn_normal)
+//
+//        setFrag(0)
+//
+//        job.setOnClickListener { setFrag(0) }
+//        normal.setOnClickListener { setFrag(1) }
 
-        setFrag(0)
-
-        job.setOnClickListener { setFrag(0) }
-        normal.setOnClickListener { setFrag(1) }
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav)
+        bottomNav.setOnItemSelectedListener(this)
 
 
+        val viewPager : ViewPager = findViewById(R.id.viewPager)
+        val tabLayout : TabLayout = findViewById(R.id.tabLayout)
+
+        val pageradapter = PagerAdapter(supportFragmentManager)
+        pageradapter.addFragment(JobFragment(intent.getStringExtra("nickname")!!, intent.getStringExtra("id")!!))
+        pageradapter.addFragment(NormalFragment(intent.getStringExtra("nickname")!!, intent.getStringExtra("id")!!))
+        viewPager.adapter = pageradapter
+        tabLayout.setupWithViewPager(viewPager)
     }
 
     private fun setFrag(fragNum : Int) {
@@ -138,6 +135,22 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             R.id.tmp2 -> Toast.makeText(applicationContext, "임시", Toast.LENGTH_SHORT).show()
             R.id.tmp3 -> Toast.makeText(applicationContext, "임시", Toast.LENGTH_SHORT).show()
+
+            R.id.bottom_write-> {
+                val intent1 = Intent(this, WritingActivity::class.java)
+                intent1.putExtra("flag", flag)
+                intent1.putExtra("id", intent.getStringExtra("id"))
+                intent1.putExtra("who", intent.getStringExtra("nickname"))
+                startActivity(intent1)
+            }
+            R.id.bottom_planner-> {
+                val intent = Intent(this,PlannerActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.bottom_myinfo-> {
+                val intent = Intent(this,MyinfoActivity::class.java)
+                startActivity(intent)
+            }
         }
         val drawer : DrawerLayout = findViewById(R.id.layout_drawer)
         drawer.closeDrawers()
