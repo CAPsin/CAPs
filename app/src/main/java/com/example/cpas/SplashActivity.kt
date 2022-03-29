@@ -33,11 +33,11 @@ class SplashActivity : AppCompatActivity() {
         else{
             databaseReference.addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    var i = 0
-                    for(data in snapshot.children){
-                        userInfoArr[i] = data.getValue().toString()
-                        i++
-                    }
+                    userInfoArr[email] = snapshot.child("email").value.toString()
+                    userInfoArr[id] = snapshot.child("id").value.toString()
+                    userInfoArr[name] = snapshot.child("name").value.toString()
+                    userInfoArr[nickname] = snapshot.child("nickname").value.toString()
+                    userInfoArr[password] = snapshot.child("password").value.toString()
                     nextActivity()
                 }
 
