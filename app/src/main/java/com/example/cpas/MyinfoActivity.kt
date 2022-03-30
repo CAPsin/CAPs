@@ -35,14 +35,12 @@ class MyinfoActivity : AppCompatActivity() {
 
         databaseReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                var i = 0
-                for(data in snapshot.children){
-                    userInfoArr[i] = data.getValue().toString()
-                    i++
-                }
-                myid.text = userInfoArr[1]
-                myemail.text = userInfoArr[0]
-                mynick.text = userInfoArr[3]
+                userInfoArr[email] = snapshot.child("email").value.toString()
+                userInfoArr[id] = snapshot.child("id").value.toString()
+                userInfoArr[nickname] = snapshot.child("nickname").value.toString()
+                myid.text = userInfoArr[id]
+                myemail.text = userInfoArr[email]
+                mynick.text = userInfoArr[nickname]
             }
 
             override fun onCancelled(error: DatabaseError) {
