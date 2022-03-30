@@ -1,30 +1,23 @@
 package com.example.cpas
 
-import android.content.ClipData
-import android.content.Context
-import android.content.DialogInterface
+import android.animation.ObjectAnimator
 import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.*
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.view.menu.MenuView
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
-import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationBarView
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayout
+import kotlinx.coroutines.*
+
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
     var flag : String = "job"
@@ -41,25 +34,42 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val category_plus : ImageButton = findViewById(R.id.btn_cateplus) //카테고리 플러스 버튼
         val category_line : LinearLayout = findViewById(R.id.category_line) //카테고리 삽입하기 위한 부모 레이어
 
+        val viewpager : ViewPager = findViewById(R.id.viewPager)
+        val tab : TabLayout = findViewById(R.id.tabLayout)
         val category_scollview : HorizontalScrollView = findViewById(R.id.scollview) //카테고리 숨겨진 페이지
 
-        val tranlateDownAnim : Animation // 카테고리 보여주는 애니메이션
-        val tranlateUpAnim : Animation // 카테고리 숨기는 애니매이션
+        val scaleDownAnim : Animation// 카테고리 보여주는 애니메이션
+        val scaleUpAnim : Animation// 카테고리 숨기는 애니매이션
 
-        tranlateDownAnim = AnimationUtils.loadAnimation(this,R.anim.translate_down);
-        tranlateUpAnim = AnimationUtils.loadAnimation(this,R.anim.translate_up);
-        
+        scaleDownAnim = AnimationUtils.loadAnimation(this,R.anim.scale_down);
+        scaleUpAnim = AnimationUtils.loadAnimation(this,R.anim.scale_up);
+
         category.setOnClickListener {//클릭시 애니메이션 작동 함수
-            if(isUp){
+            if (isUp) {
+                ObjectAnimator.ofFloat(viewpager, "translationY", -10f).apply {
+                    duration = 500
+                    start()
+                }
+                ObjectAnimator.ofFloat(tab, "translationY", -10f).apply {
+                    duration = 500
+                    start()
+                }
                 category_scollview.visibility = View.GONE
-                category_scollview.startAnimation(tranlateUpAnim)
-            }
-            else{
+                category_scollview.startAnimation(scaleUpAnim)
+            } else {
+                ObjectAnimator.ofFloat(viewpager, "translationY", 140f).apply {
+                    duration = 500
+                    start()
+                }
+                ObjectAnimator.ofFloat(tab, "translationY", 140f).apply {
+                    duration = 500
+                    start()
+                }
                 category_scollview.visibility = View.VISIBLE
-                category_scollview.startAnimation(tranlateDownAnim)
+                category_scollview.startAnimation(scaleDownAnim)
             }
-            isUp = !isUp
-        }
+            }
+
         more.setOnClickListener {
             val drawer : DrawerLayout = findViewById(R.id.layout_drawer)
             drawer.openDrawer(GravityCompat.END)
