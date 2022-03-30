@@ -27,6 +27,15 @@
         <entry key="..\:/Users/rudtj/Documents/GitHub/CAPs/app/src/main/res/layout/activity_splash.xml" value="0.20052083333333334" />
         <entry key="..\:/Users/rudtj/Documents/GitHub/CAPs/app/src/main/res/layout/activity_writing.xml" value="0.35572916666666665" />
         <entry key="..\:/Users/rudtj/Documents/GitHub/CAPs/app/src/main/res/layout/list_item.xml" value="0.35989583333333336" />
+<<<<<<< Updated upstream
+=======
+        <entry key="..\:/Users/rudtj/Documents/GitHub/CAPs/app/src/main/res/layout/plan_item.xml" value="0.25" />
+        <entry key="..\:/gitproject/app/src/main/res/layout/activity_category.xml" value="0.36614583333333334" />
+        <entry key="..\:/gitproject/app/src/main/res/layout/activity_main.xml" value="0.5" />
+        <entry key="..\:/gitproject/app/src/main/res/layout/activity_myinfo.xml" value="0.36614583333333334" />
+        <entry key="..\:/gitproject/app/src/main/res/layout/activity_planner.xml" value="0.1875" />
+        <entry key="..\:/gitproject/app/src/main/res/layout/activity_writing.xml" value="0.36614583333333334" />
+>>>>>>> Stashed changes
       </map>
     </option>
   </component>
