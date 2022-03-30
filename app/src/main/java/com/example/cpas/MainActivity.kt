@@ -55,8 +55,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 category_scollview.startAnimation(tranlateUpAnim)
             }
             else{
-                category_scollview.startAnimation(tranlateDownAnim)
                 category_scollview.visibility = View.VISIBLE
+                category_scollview.startAnimation(tranlateDownAnim)
             }
             isUp = !isUp
         }
@@ -64,26 +64,20 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             val drawer : DrawerLayout = findViewById(R.id.layout_drawer)
             drawer.openDrawer(GravityCompat.END)
         }
-        category_plus.setOnClickListener {
-            val alert = AlertDialog.Builder(this)
-            alert.setTitle("카테고리 추가")
-            alert.setMessage("원하시는 카테고리를 추가하십시오")
-            val edittext = EditText(this)
-            val category_text = TextView(this) //카테고리 추가 (텍스트가 들어가는지 확인하려고 버튼으로 설정함)
+        category_plus.setOnClickListener { //카테고리 추가 버튼
+            val dialog = CategoryDialog(this) // 카테고리 다이얼로그 액티비티 받기
+            val category_text = TextView(this)
+            dialog.showDialog()
+            dialog.setOnClickListener(object : CategoryDialog.OnDialogClickListener {
+                override fun onClicked(name: String)
+                {
+                    category_text.text = name
+                    category_text.setTextSize(10F)
+                    category_text.setTextColor(Color.BLACK)
+                    category_line.addView(category_text)
+                }
 
-
-            alert.setPositiveButton("추가") {
-                dialog, which -> Toast.makeText(applicationContext, "추가되었습니다",Toast.LENGTH_LONG).show()
-                category_text.text = edittext.text.toString() //글씨 왜 안들어가는지 모르겠음 ;;;
-                category_text.setTextSize(10F)
-                category_text.setTextColor(Color.BLACK)
-                category_line.addView(category_text)
-            }
-            alert.setNeutralButton("취소",null)
-
-            alert.setView(edittext)
-            alert.create()
-            alert.show()
+            })
         }
         val nav : NavigationView = findViewById(R.id.naviView)
         nav.setNavigationItemSelectedListener(this)
