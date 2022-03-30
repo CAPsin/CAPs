@@ -53,8 +53,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 category_scollview.startAnimation(tranlateUpAnim)
             }
             else{
-                category_scollview.visibility = View.VISIBLE
                 category_scollview.startAnimation(tranlateDownAnim)
+                category_scollview.visibility = View.VISIBLE
             }
             isUp = !isUp
         }
@@ -66,7 +66,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             val drawer : DrawerLayout = findViewById(R.id.layout_drawer)
             drawer.openDrawer(GravityCompat.END)
         }
-<<<<<<< Updated upstream
         planner.setOnClickListener {
             val intent = Intent(this,PlannerActivity::class.java)
             startActivity(intent)
@@ -91,22 +90,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             alert.setView(edittext)
             alert.create()
             alert.show()
-=======
-        category_plus.setOnClickListener { //카테고리 추가 버튼
-            val dialog = CategoryDialog(this) // 카테고리 다이얼로그 액티비티 받기
-            val category_text = TextView(this)
-            dialog.showDialog()
-            dialog.setOnClickListener(object : CategoryDialog.OnDialogClickListener {
-                override fun onClicked(name: String)
-                {
-                    category_text.text = name
-                    category_text.setTextSize(10F)
-                    category_text.setTextColor(Color.BLACK)
-                    category_line.addView(category_text)
-                }
-
-            })
->>>>>>> Stashed changes
         }
         val nav : NavigationView = findViewById(R.id.naviView)
         nav.setNavigationItemSelectedListener(this)
