@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatButton
@@ -13,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import org.w3c.dom.Text
+import java.text.SimpleDateFormat
 import java.util.*
 
 class PlannerActivity : AppCompatActivity() {
@@ -26,12 +29,22 @@ class PlannerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_planner)
 
+        val pickdate : TextView = findViewById(R.id.pickdate)
+        var nowdate = intent.getStringExtra("nowdate")
+
+        if(nowdate == null){
+            val sdf = SimpleDateFormat("yyyy/MM/dd")
+            val time : String = sdf.format(Date())
+            val nowdates = time.split("/")
+            nowdate = "${nowdates[0]}년 ${nowdates[1]}월 ${nowdates[2]}일"
+        }
+
+        pickdate.text = nowdate
+
         auth = FirebaseAuth.getInstance()
         databaseReference =
             FirebaseDatabase.getInstance().getReference("Users").child(auth.uid.toString())
 
-        //추가 버튼
-        //val addPlanButton = findViewById<AppCompatButton>(R.id.addPlanButton)
         //달력 버튼
         val calendarButton = findViewById<ImageButton>(R.id.calendarButton)
         //리사이클러 뷰
@@ -43,15 +56,9 @@ class PlannerActivity : AppCompatActivity() {
         planAdapter.planList = planDataList
 
 
-
-
         calendarButton.setOnClickListener {
             Log.d("TAG", "임시 달력 리스너")
         }
-    }
-
-    fun upload(planData: planData) {
-        databaseReference.child("plan").child(dateString).setValue(planData)
     }
 
 }
