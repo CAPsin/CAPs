@@ -38,12 +38,9 @@ class PlannerActivity : AppCompatActivity() {
             val nowdates = time.split("/")
             nowdate = "${nowdates[0]}년 ${nowdates[1]}월 ${nowdates[2]}일"
         }
-
         pickdate.text = nowdate
-
         auth = FirebaseAuth.getInstance()
-        databaseReference =
-            FirebaseDatabase.getInstance().getReference("Users").child(auth.uid.toString())
+        databaseReference = FirebaseDatabase.getInstance().getReference("Plan").child(auth.uid.toString())
 
         //달력 버튼
         val calendarButton = findViewById<ImageButton>(R.id.calendarButton)
@@ -54,10 +51,15 @@ class PlannerActivity : AppCompatActivity() {
         planListView.adapter = planAdapter
         planDataList.add("+")
         planAdapter.planList = planDataList
-
+        val data = mapOf<String, String>(
+            "title" to "이거테스트",
+            "time" to "0"
+        )
 
         calendarButton.setOnClickListener {
             Log.d("TAG", "임시 달력 리스너")
+            databaseReference.child("plan").child(dateString).child("test")
+                .updateChildren(data)
         }
     }
 

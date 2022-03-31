@@ -1,5 +1,6 @@
 package com.example.cpas
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,7 +10,8 @@ import com.google.firebase.database.*
 class SplashActivity : AppCompatActivity() {
     private lateinit var auth : FirebaseAuth // 파이어 베이스 형식
     private lateinit var databaseReference: DatabaseReference
-    var userInfoArr = arrayOfNulls<String>(5)
+    public lateinit var  context_main : Context
+    public var userInfoArr = arrayOfNulls<String>(5)
 
     //데이터 가져오기 형식 보기 쉽게 영단어로 표현
     private var email = 0
@@ -21,7 +23,7 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-
+        context_main = this
         auth = FirebaseAuth.getInstance()
         databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(auth.uid.toString())
 
@@ -58,5 +60,9 @@ class SplashActivity : AppCompatActivity() {
         intent.putExtra("password", userInfoArr[password])
         startActivity(intent)
         finish()
+    }
+
+    public fun getData(i : Int): String? {
+        return userInfoArr[i]
     }
 }

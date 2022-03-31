@@ -160,8 +160,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 startActivity(intent1)
             }
             R.id.bottom_planner-> {
-                val intent = Intent(this,PlannerActivity::class.java)
-                startActivity(intent)
+                val intent1 = Intent(this,PlannerActivity::class.java)
+                startActivity(intent1)
                 finish()
             }
             R.id.bottom_myinfo-> {

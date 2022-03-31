@@ -30,11 +30,11 @@ class SetPlanActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_set_plan)
 
-        var flag = false
+        var id = intent.getStringExtra("id")
 
         auth = FirebaseAuth.getInstance()
         databaseReference =
-            FirebaseDatabase.getInstance().getReference("Users").child(auth.uid.toString())
+            FirebaseDatabase.getInstance().getReference("Plan").child(id.toString())
 
 
         var dateString = ""
@@ -69,12 +69,11 @@ class SetPlanActivity : AppCompatActivity() {
                 )
 
 
-                databaseReference.child("plan").child(dateString).child(editplan.text.toString())
+                databaseReference.child(dateString).child(editplan.text.toString())
                     .updateChildren(data).addOnSuccessListener {
                     val intent = Intent(this, PlannerActivity::class.java)
                     intent.putExtra("nowdate", dateString)
                     startActivity(intent)
-                    flag = true
 
                 }.addOnFailureListener {
                     Toast.makeText(this, "실패", Toast.LENGTH_SHORT).show()
@@ -82,8 +81,5 @@ class SetPlanActivity : AppCompatActivity() {
 
             }
         }
-        Handler().postDelayed({
-            Log.d("TAG", "몰루")
-        }, 2000)
     }
 }

@@ -38,6 +38,9 @@ class LoginActivity : AppCompatActivity() {
                 val intent = Intent(this, MainActivity::class.java)
                 intent.putExtra("id", inputid.text.toString())
                 intent.putExtra("nickname", user_nickname)
+                intent.putExtra("email", user_email)
+                intent.putExtra("name", user_name)
+                intent.putExtra("password", user_password)
                 startActivity(intent)
                 finish()
             }
