@@ -94,32 +94,24 @@
 
         <EditText
             android:id="@+id/postComment"
-            android:layout_width="200dp"
+            android:layout_width="288dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:hint="댓글을 입력하세요"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/postCommentButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:text="완료"
-            app:layout_constraintBottom_toBottomOf="@+id/postComment"
+            android:text="작성"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/postComment"
-            app:layout_constraintTop_toTopOf="@+id/postComment" />
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/postCommentText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="16dp"
-            android:text="댓글 : "
-            android:textSize="30sp"
-            app:layout_constraintBottom_toBottomOf="@+id/postComment"
-            app:layout_constraintEnd_toStartOf="@+id/postComment"
-            app:layout_constraintTop_toTopOf="@+id/postComment" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
