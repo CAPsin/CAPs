@@ -20,8 +20,8 @@ class AssignActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_assign)
         auth = FirebaseAuth.getInstance()
-
-
+        //test yong code
+//testttt
         databaseReference = FirebaseDatabase.getInstance().getReference("Users")
 
         val assignbtn = findViewById<AppCompatButton>(R.id.Assignbtn)
