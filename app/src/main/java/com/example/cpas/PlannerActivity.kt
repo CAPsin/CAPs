@@ -12,8 +12,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatButton
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import org.w3c.dom.Text
 import java.text.SimpleDateFormat
 import java.util.*
@@ -30,17 +29,16 @@ class PlannerActivity : AppCompatActivity() {
         setContentView(R.layout.activity_planner)
 
         val pickdate : TextView = findViewById(R.id.pickdate)
-        var nowdate = intent.getStringExtra("nowdate")
+        var id = intent.getStringExtra("id")
 
-        if(nowdate == null){
-            val sdf = SimpleDateFormat("yyyy/MM/dd")
-            val time : String = sdf.format(Date())
-            val nowdates = time.split("/")
-            nowdate = "${nowdates[0]}년 ${nowdates[1]}월 ${nowdates[2]}일"
-        }
+        val sdf = SimpleDateFormat("yyyy/MM/dd")
+        val time : String = sdf.format(Date())
+        val nowdates = time.split("/")
+        var nowdate = "${nowdates[0]}년 ${nowdates[1]}월 ${nowdates[2]}일"
         pickdate.text = nowdate
         auth = FirebaseAuth.getInstance()
-        databaseReference = FirebaseDatabase.getInstance().getReference("Plan").child(auth.uid.toString())
+        databaseReference = FirebaseDatabase.getInstance().getReference("Plan").child(id.toString())
+
 
         //달력 버튼
         val calendarButton = findViewById<ImageButton>(R.id.calendarButton)
@@ -55,6 +53,22 @@ class PlannerActivity : AppCompatActivity() {
             "title" to "이거테스트",
             "time" to "0"
         )
+
+        databaseReference.child(nowdate).addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                planDataList.clear()
+                for(data in snapshot.children){
+                    planDataList.add(data.child("title").value.toString())
+                }
+                planDataList.add("+")
+                planListView.adapter?.notifyDataSetChanged()
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+
+        })
 
         calendarButton.setOnClickListener {
             Log.d("TAG", "임시 달력 리스너")

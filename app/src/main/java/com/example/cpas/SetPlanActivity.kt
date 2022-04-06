@@ -71,9 +71,7 @@ class SetPlanActivity : AppCompatActivity() {
 
                 databaseReference.child(dateString).child(editplan.text.toString())
                     .updateChildren(data).addOnSuccessListener {
-                    val intent = Intent(this, PlannerActivity::class.java)
-                    intent.putExtra("nowdate", dateString)
-                    startActivity(intent)
+                        finish()
 
                 }.addOnFailureListener {
                     Toast.makeText(this, "실패", Toast.LENGTH_SHORT).show()
