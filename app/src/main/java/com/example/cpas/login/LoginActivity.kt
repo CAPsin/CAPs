@@ -7,7 +7,7 @@ import android.util.Log
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
-import com.example.cpas.home.MainActivity
+import com.example.cpas.MainActivity
 import com.example.cpas.R
 import com.example.cpas.assign.AssignActivity
 

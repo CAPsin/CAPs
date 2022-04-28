@@ -1,4 +1,4 @@
-package com.example.cpas.home
+package com.example.cpas
 
 import android.animation.ObjectAnimator
 import android.content.Intent
@@ -14,6 +14,10 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.viewpager.widget.ViewPager
 import com.example.cpas.*
+import com.example.cpas.home.CategoryDialog
+import com.example.cpas.home.JobFragment
+import com.example.cpas.home.NormalFragment
+import com.example.cpas.home.PagerAdapter
 import com.example.cpas.planner.PlannerActivity
 import com.example.cpas.posting.WritingActivity
 import com.example.cpas.profile.MyinfoActivity
