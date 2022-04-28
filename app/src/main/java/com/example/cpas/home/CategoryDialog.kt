@@ -1,9 +1,10 @@
-package com.example.cpas
+package com.example.cpas.home
 
 import android.app.Dialog
 import android.content.Context
 import android.view.WindowManager
 import android.widget.EditText
+import com.example.cpas.R
 import kotlinx.android.synthetic.main.activity_categorydialog.*
 
 class CategoryDialog(context: Context)
