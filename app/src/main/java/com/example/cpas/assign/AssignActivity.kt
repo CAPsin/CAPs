@@ -1,17 +1,17 @@
-package com.example.cpas
+package com.example.cpas.assign
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
+import com.example.cpas.login.LoginActivity
+import com.example.cpas.R
+import com.example.cpas.User
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.ktx.Firebase
 
 class AssignActivity : AppCompatActivity() {
     private lateinit var auth : FirebaseAuth // 파이어 베이스 형식
@@ -22,6 +22,7 @@ class AssignActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         //test yong code
 //testttt
+        //test 주비비비
         databaseReference = FirebaseDatabase.getInstance().getReference("Users")
 
         val assignbtn = findViewById<AppCompatButton>(R.id.Assignbtn)

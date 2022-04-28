@@ -1,9 +1,8 @@
-package com.example.cpas
+package com.example.cpas.posting
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.DisplayMetrics
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
@@ -12,6 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.cpas.R
 import com.google.firebase.database.*
 import java.lang.System.currentTimeMillis
 import java.text.SimpleDateFormat

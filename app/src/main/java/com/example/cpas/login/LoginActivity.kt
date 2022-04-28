@@ -1,4 +1,4 @@
-package com.example.cpas
+package com.example.cpas.login
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,9 +7,9 @@ import android.util.Log
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.*
-import com.google.firebase.database.ktx.getValue
+import com.example.cpas.MainActivity
+import com.example.cpas.R
+import com.example.cpas.assign.AssignActivity
 
 class LoginActivity : AppCompatActivity() {
 
