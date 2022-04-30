@@ -1,11 +1,11 @@
-package com.example.cpas
+package com.example.cpas.posting
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import org.w3c.dom.Text
+import com.example.cpas.R
 
 class CommentAdapter(val commentList : ArrayList<Comment>) : RecyclerView.Adapter<CommentAdapter.CustomViewHolder>() {
 
@@ -15,13 +15,13 @@ class CommentAdapter(val commentList : ArrayList<Comment>) : RecyclerView.Adapte
         val time : TextView = itemView.findViewById(R.id.comment_time)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentAdapter.CustomViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.comment_item, parent, false)
 
         return CustomViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: CommentAdapter.CustomViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         holder.who.text = commentList[position].who
         holder.content.text = commentList[position].content
         holder.time.text = commentList[position].time
