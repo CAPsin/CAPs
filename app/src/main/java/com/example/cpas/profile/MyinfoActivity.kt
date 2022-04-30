@@ -1,11 +1,10 @@
-package com.example.cpas
+package com.example.cpas.profile
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.AppCompatButton
+import com.example.cpas.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 

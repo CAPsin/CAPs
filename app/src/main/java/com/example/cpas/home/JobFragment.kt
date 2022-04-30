@@ -1,4 +1,4 @@
-package com.example.cpas
+package com.example.cpas.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,8 +8,10 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.cpas.posting.Posting
+import com.example.cpas.posting.PostingAdapter
+import com.example.cpas.R
 import com.google.firebase.database.*
-import java.util.*
 import kotlin.Comparator
 import kotlin.collections.ArrayList
 

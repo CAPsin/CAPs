@@ -1,4 +1,4 @@
-package com.example.cpas
+package com.example.cpas.posting
 
 import android.app.Activity
 import android.content.Intent
@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
+import com.example.cpas.R
 
 class PostingAdapter(val postingList:ArrayList<Posting>, val who : String, val id : String) : Adapter<PostingAdapter.CustomViewHolder>() {
 
@@ -24,12 +25,12 @@ class PostingAdapter(val postingList:ArrayList<Posting>, val who : String, val i
         val who = itemView.findViewById<TextView>(R.id.tv_who)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostingAdapter.CustomViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
         return CustomViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: PostingAdapter.CustomViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         holder.title.text = postingList.get(position).title
         var preView = postingList.get(position).content.replace('\n',' ')
         when {
