@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
+            android:name=".searching.SearchActivity"
+            android:exported="false" />
+        <activity
             android:name=".planner.SetPlanActivity"
             android:exported="true" />
         <activity

@@ -13,7 +13,6 @@ import android.widget.*
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.viewpager.widget.ViewPager
-import com.example.cpas.*
 import com.example.cpas.home.CategoryDialog
 import com.example.cpas.home.JobFragment
 import com.example.cpas.home.NormalFragment
@@ -21,6 +20,7 @@ import com.example.cpas.home.PagerAdapter
 import com.example.cpas.planner.PlannerActivity
 import com.example.cpas.posting.WritingActivity
 import com.example.cpas.profile.MyinfoActivity
+import com.example.cpas.searching.SearchActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayout
@@ -127,6 +127,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         pageradapter.addFragment(NormalFragment(intent.getStringExtra("nickname")!!, intent.getStringExtra("id")!!))
         viewPager.adapter = pageradapter
         tabLayout.setupWithViewPager(viewPager)
+
+
+        search.setOnClickListener {
+            val intent = Intent(this, SearchActivity::class.java)
+            startActivity(intent)
+
+        }
     }
     private fun changeDP(value : Int) : Int{
         var displayMetrics = resources.displayMetrics
