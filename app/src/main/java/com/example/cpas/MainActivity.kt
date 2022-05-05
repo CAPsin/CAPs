@@ -20,7 +20,7 @@ import kotlinx.coroutines.*
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
-    var flag : String = "job"
+    var flag : String = "job"//ㅇㅇ
     var isUp = false // 카테고리 애니메이션 상태표시
 
     override fun onCreate(savedInstanceState: Bundle?) {
