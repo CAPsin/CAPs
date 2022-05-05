@@ -29,7 +29,7 @@ import com.google.android.material.tabs.TabLayout
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
     var flag : String = "job"
     var isUp = false // 카테고리 애니메이션 상태표시
-
+    //주석이다
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
