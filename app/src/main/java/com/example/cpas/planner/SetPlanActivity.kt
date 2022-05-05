@@ -76,5 +76,9 @@ class SetPlanActivity : AppCompatActivity() {
 
             }
         }
+
+        cancleButton.setOnClickListener {  // 뒤로가기 버튼 해당 엑티비티 종료
+            finish()
+        }
     }
 }
