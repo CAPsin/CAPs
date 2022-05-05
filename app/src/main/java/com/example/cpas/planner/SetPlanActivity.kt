@@ -1,23 +1,20 @@
-package com.example.cpas
+package com.example.cpas.planner
 
-import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.os.HandlerThread
 import android.util.Log
 import android.widget.DatePicker
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import com.example.cpas.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import java.text.SimpleDateFormat
 import java.util.*
-import java.util.concurrent.CountDownLatch
 
 class SetPlanActivity : AppCompatActivity() {
 
@@ -78,6 +75,10 @@ class SetPlanActivity : AppCompatActivity() {
                 }
 
             }
+        }
+
+        cancleButton.setOnClickListener {  // 뒤로가기 버튼 해당 엑티비티 종료
+            finish()
         }
     }
 }

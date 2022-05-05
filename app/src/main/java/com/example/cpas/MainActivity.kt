@@ -13,16 +13,23 @@ import android.widget.*
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.viewpager.widget.ViewPager
+import com.example.cpas.home.CategoryDialog
+import com.example.cpas.home.JobFragment
+import com.example.cpas.home.NormalFragment
+import com.example.cpas.home.PagerAdapter
+import com.example.cpas.planner.PlannerActivity
+import com.example.cpas.posting.WritingActivity
+import com.example.cpas.profile.MyinfoActivity
+import com.example.cpas.searching.SearchActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayout
-import kotlinx.coroutines.*
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
     var flag : String = "job"//ㅇㅇ
     var isUp = false // 카테고리 애니메이션 상태표시
-
+    //주석이다
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -41,8 +48,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val scaleDownAnim : Animation// 카테고리 보여주는 애니메이션
         val scaleUpAnim : Animation// 카테고리 숨기는 애니매이션
 
-        scaleDownAnim = AnimationUtils.loadAnimation(this,R.anim.scale_down);
-        scaleUpAnim = AnimationUtils.loadAnimation(this,R.anim.scale_up);
+        scaleDownAnim = AnimationUtils.loadAnimation(this, R.anim.scale_down);
+        scaleUpAnim = AnimationUtils.loadAnimation(this, R.anim.scale_up);
 
         category.setOnClickListener {//클릭시 애니메이션 작동 함수
             if (isUp) {
@@ -120,6 +127,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         pageradapter.addFragment(NormalFragment(intent.getStringExtra("nickname")!!, intent.getStringExtra("id")!!))
         viewPager.adapter = pageradapter
         tabLayout.setupWithViewPager(viewPager)
+
+
+        search.setOnClickListener {
+            val intent = Intent(this, SearchActivity::class.java)
+            startActivity(intent)
+
+        }
     }
     private fun changeDP(value : Int) : Int{
         var displayMetrics = resources.displayMetrics
@@ -152,21 +166,21 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.tmp2 -> Toast.makeText(applicationContext, "임시", Toast.LENGTH_SHORT).show()
             R.id.tmp3 -> Toast.makeText(applicationContext, "임시", Toast.LENGTH_SHORT).show()
 
-            R.id.bottom_write-> {
+            R.id.bottom_write -> {
                 val intent1 = Intent(this, WritingActivity::class.java)
                 intent1.putExtra("flag", flag)
                 intent1.putExtra("id", intent.getStringExtra("id"))
                 intent1.putExtra("who", intent.getStringExtra("nickname"))
                 startActivity(intent1)
             }
-            R.id.bottom_planner-> {
-                val intent1 = Intent(this,PlannerActivity::class.java)
+            R.id.bottom_planner -> {
+                val intent1 = Intent(this, PlannerActivity::class.java)
                 intent1.putExtra("id", intent.getStringExtra("id"))
                 startActivity(intent1)
                 finish()
             }
-            R.id.bottom_myinfo-> {
-                val intent = Intent(this,MyinfoActivity::class.java)
+            R.id.bottom_myinfo -> {
+                val intent = Intent(this, MyinfoActivity::class.java)
                 startActivity(intent)
             }
         }

@@ -10,19 +10,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
-            android:name=".SetPlanActivity"
+            android:name=".searching.SearchActivity"
+            android:exported="false" />
+        <activity
+            android:name=".planner.SetPlanActivity"
             android:exported="true" />
         <activity
-            android:name=".PlannerActivity"
+            android:name=".planner.PlannerActivity"
             android:exported="true" />
         <activity
             android:name=".test"
             android:exported="false" />
         <activity
-            android:name=".InPosting"
+            android:name=".posting.InPosting"
             android:exported="true" />
         <activity
-            android:name=".WritingActivity"
+            android:name=".posting.WritingActivity"
             android:exported="false" />
         <activity
             android:name=".SplashActivity"
@@ -34,15 +37,18 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AssignActivity"
+            android:name=".assign.AssignActivity"
             android:exported="true" /> <!-- android:theme="@style/Theme.Cpas"> -->
         <activity
-            android:name=".LoginActivity"
+            android:name=".login.LoginActivity"
             android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true" />
-        <activity android:name=".MyinfoActivity" />
+        <activity android:name=".profile.MyinfoActivity" />
+        <activity
+            android:name=".profile.MypostingFragment"
+            android:exported="true" />
     </application>
 
 </manifest>

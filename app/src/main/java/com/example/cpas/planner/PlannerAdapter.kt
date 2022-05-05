@@ -1,27 +1,18 @@
-package com.example.cpas
+package com.example.cpas.planner
 
 import android.app.Activity
-import android.app.DatePickerDialog
-import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.widget.AppCompatButton
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.example.cpas.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import java.util.*
-import java.util.concurrent.CountDownLatch
-import kotlin.coroutines.CoroutineContext
 
 
 class PlannerAdapter(private val context: Context, private val plannerActivity: PlannerActivity) :
@@ -38,12 +29,12 @@ class PlannerAdapter(private val context: Context, private val plannerActivity: 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
-    ): PlannerAdapter.CustomViewHolder {
+    ): CustomViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.plan_item, parent, false)
         return CustomViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: PlannerAdapter.CustomViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         holder.button.text = planList[position]
         databaseReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
