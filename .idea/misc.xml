@@ -56,9 +56,13 @@
         <entry key="..\:/gitproject/app/src/main/res/layout/activity_category.xml" value="0.36614583333333334" />
         <entry key="..\:/gitproject/app/src/main/res/layout/activity_categorydialog.xml" value="0.36614583333333334" />
         <entry key="..\:/gitproject/app/src/main/res/layout/activity_main.xml" value="0.5" />
-        <entry key="..\:/gitproject/app/src/main/res/layout/activity_myinfo.xml" value="0.36614583333333334" />
+        <entry key="..\:/gitproject/app/src/main/res/layout/activity_myinfo.xml" value="0.33" />
         <entry key="..\:/gitproject/app/src/main/res/layout/activity_planner.xml" value="0.1875" />
         <entry key="..\:/gitproject/app/src/main/res/layout/activity_writing.xml" value="0.36614583333333334" />
+        <entry key="..\:/gitproject/app/src/main/res/layout/job_fragment.xml" value="0.33796296296296297" />
+        <entry key="..\:/gitproject/app/src/main/res/layout/list_item.xml" value="0.36614583333333334" />
+        <entry key="..\:/gitproject/app/src/main/res/layout/myposing_fragment.xml" value="0.33796296296296297" />
+        <entry key="..\:/gitproject/app/src/main/res/layout/normal_fragment.xml" value="0.33796296296296297" />
       </map>
     </option>
   </component>
