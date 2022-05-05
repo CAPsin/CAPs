@@ -82,6 +82,7 @@
             android:layout_height="50dp"
             android:layout_weight="1"
             android:visibility="gone"
+            android:background="#6667AB"
             app:layout_constraintBottom_toTopOf="@id/viewPager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"

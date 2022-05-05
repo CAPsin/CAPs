@@ -97,7 +97,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     category_text.setTextSize(20F)
                     category_text.layoutParams = layoutParams
                     layoutParams.setMargins(changeDP(5), changeDP(12), changeDP(5), 0)
-                    category_text.setTextColor(Color.BLACK)
+                    category_text.setTextColor(Color.WHITE)
                     //category_text.setCompoundDrawables(R.drawable.is_category_bolder,null,null,null)
                     category_line.addView(category_text)
                 }

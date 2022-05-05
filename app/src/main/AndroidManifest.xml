@@ -46,6 +46,9 @@
             android:name=".MainActivity"
             android:exported="true" />
         <activity android:name=".profile.MyinfoActivity" />
+        <activity
+            android:name=".profile.MypostingFragment"
+            android:exported="true" />
     </application>
 
 </manifest>
