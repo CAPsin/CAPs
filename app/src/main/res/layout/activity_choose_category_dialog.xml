@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".posting.ChooseCategoryDialog">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="카테고리를 선택하세요"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.gridlayout.widget.GridLayout
+            android:id="@+id/gridLayout2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
+            app:columnCount="4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView3">
+
+            <ToggleButton
+                android:id="@+id/dialog_toggleButton1"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/box_border"
+                android:text="ToggleButton"
+                android:textOff="여행"
+                android:textOn="여행" />
+
+            <ToggleButton
+                android:id="@+id/dialog_toggleButton2"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/box_border"
+                android:text="ToggleButton"
+                android:textOff="반려동물"
+                android:textOn="반려동물" />
+
+            <ToggleButton
+                android:id="@+id/dialog_toggleButton3"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/box_border"
+                android:text="ToggleButton"
+                android:textOff="외국어"
+                android:textOn="외국어" />
+
+            <ToggleButton
+                android:id="@+id/dialog_toggleButton4"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/box_border"
+                android:text="ToggleButton"
+                android:textOff="봉사활동"
+                android:textOn="봉사활동" />
+
+            <ToggleButton
+                android:id="@+id/dialog_toggleButton5"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/box_border"
+                android:text="ToggleButton"
+                android:textOff="자동차"
+                android:textOn="자동차" />
+
+            <ToggleButton
+                android:id="@+id/dialog_toggleButton6"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/box_border"
+                android:text="ToggleButton"
+                android:textOff="음악"
+                android:textOn="음악" />
+
+            <ToggleButton
+                android:id="@+id/dialog_toggleButton7"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/box_border"
+                android:text="ToggleButton"
+                android:textOff="레저"
+                android:textOn="레저" />
+
+            <ToggleButton
+                android:id="@+id/dialog_toggleButton8"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/box_border"
+                android:text="ToggleButton"
+                android:textOff="책"
+                android:textOn="책" />
+
+            <ToggleButton
+                android:id="@+id/dialog_toggleButton9"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/box_border"
+                android:text="ToggleButton"
+                android:textOff="스포츠"
+                android:textOn="스포츠" />
+
+            <ToggleButton
+                android:id="@+id/dialog_toggleButton10"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/box_border"
+                android:text="ToggleButton"
+                android:textOff="미술/공예"
+                android:textOn="미술/공예" />
+
+            <ToggleButton
+                android:id="@+id/dialog_toggleButton11"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/box_border"
+                android:text="ToggleButton"
+                android:textOff="문화"
+                android:textOn="문화" />
+
+            <ToggleButton
+                android:id="@+id/dialog_toggleButton12"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/box_border"
+                android:text="ToggleButton"
+                android:textOff="춤"
+                android:textOn="춤" />
+
+            <ToggleButton
+                android:id="@+id/dialog_toggleButton13"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/box_border"
+                android:text="ToggleButton"
+                android:textOff="게임"
+                android:textOn="게임" />
+
+            <ToggleButton
+                android:id="@+id/dialog_toggleButton14"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/box_border"
+                android:text="ToggleButton"
+                android:textOff="음식"
+                android:textOn="음식" />
+
+            <ToggleButton
+                android:id="@+id/dialog_toggleButton15"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/box_border"
+                android:text="ToggleButton"
+                android:textOff="기타"
+                android:textOn="기타" />
+
+        </androidx.gridlayout.widget.GridLayout>
+
+        <Button
+            android:id="@+id/btn_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="확인"
+            app:layout_constraintEnd_toStartOf="@+id/btn_cancel"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/gridLayout2" />
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="취소"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_ok"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btn_ok" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
