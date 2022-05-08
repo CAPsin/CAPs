@@ -72,17 +72,6 @@ class WritingActivity : AppCompatActivity() {
             dialog.showDialog()
         }
 
-//        for (index in 0..14) { // 토글 버튼에 이벤트 달기
-//            val toggle : ToggleButton = findViewById(toggleID[index])
-//
-//            toggle.setOnClickListener {
-//                if(selected[index]) // 선택을 취소함
-//                    selected[index] = !selected[index]
-//                else // 선택함
-//                    selected[index] = !selected[index]
-//            }
-//        }
-
         post.setOnClickListener {
             if(title.text.toString().trim() == "") {
                 Toast.makeText(applicationContext, "제목을 입력해 주세요", Toast.LENGTH_SHORT).show()

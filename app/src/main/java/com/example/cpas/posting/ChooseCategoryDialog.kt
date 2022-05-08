@@ -41,17 +41,11 @@ class ChooseCategoryDialog(context : Context) : AppCompatActivity() {
             toggle.setOnClickListener {
                 if(selected[index]) { // 선택을 취소함
                     selected[index] = !selected[index]
-//                    val button = dialog.findViewById<ToggleButton>(toggleID[index])
-//                    button.setTextColor(Color.BLACK)
-//                    button.background = ContextCompat.getDrawable(parent.applicationContext, R.drawable.box_border)
                     toggle.setTextColor(Color.BLACK)
                     toggle.setBackgroundColor(Color.WHITE)
                 }
                 else { // 선택함
                     selected[index] = !selected[index]
-//                    val button = dialog.findViewById<ToggleButton>(toggleID[index])
-//                    button.setTextColor(Color.WHITE)
-//                    button.background = ContextCompat.getDrawable(parent.applicationContext, R.drawable.box_black)
                     toggle.setTextColor(Color.WHITE)
                     toggle.setBackgroundColor(Color.BLACK)
                 }

@@ -39,7 +39,7 @@
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="@drawable/box_border"
+                android:background="@drawable/box_white"
                 android:text="ToggleButton"
                 android:textOff="여행"
                 android:textOn="여행" />
@@ -49,7 +49,7 @@
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="@drawable/box_border"
+                android:background="@drawable/box_white"
                 android:text="ToggleButton"
                 android:textOff="반려동물"
                 android:textOn="반려동물" />
@@ -59,7 +59,7 @@
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="@drawable/box_border"
+                android:background="@drawable/box_white"
                 android:text="ToggleButton"
                 android:textOff="외국어"
                 android:textOn="외국어" />
@@ -69,7 +69,7 @@
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="@drawable/box_border"
+                android:background="@drawable/box_white"
                 android:text="ToggleButton"
                 android:textOff="봉사활동"
                 android:textOn="봉사활동" />
@@ -79,7 +79,7 @@
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="@drawable/box_border"
+                android:background="@drawable/box_white"
                 android:text="ToggleButton"
                 android:textOff="자동차"
                 android:textOn="자동차" />
@@ -89,7 +89,7 @@
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="@drawable/box_border"
+                android:background="@drawable/box_white"
                 android:text="ToggleButton"
                 android:textOff="음악"
                 android:textOn="음악" />
@@ -99,7 +99,7 @@
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="@drawable/box_border"
+                android:background="@drawable/box_white"
                 android:text="ToggleButton"
                 android:textOff="레저"
                 android:textOn="레저" />
@@ -109,7 +109,7 @@
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="@drawable/box_border"
+                android:background="@drawable/box_white"
                 android:text="ToggleButton"
                 android:textOff="책"
                 android:textOn="책" />
@@ -119,7 +119,7 @@
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="@drawable/box_border"
+                android:background="@drawable/box_white"
                 android:text="ToggleButton"
                 android:textOff="스포츠"
                 android:textOn="스포츠" />
@@ -129,7 +129,7 @@
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="@drawable/box_border"
+                android:background="@drawable/box_white"
                 android:text="ToggleButton"
                 android:textOff="미술/공예"
                 android:textOn="미술/공예" />
@@ -139,7 +139,7 @@
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="@drawable/box_border"
+                android:background="@drawable/box_white"
                 android:text="ToggleButton"
                 android:textOff="문화"
                 android:textOn="문화" />
@@ -149,7 +149,7 @@
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="@drawable/box_border"
+                android:background="@drawable/box_white"
                 android:text="ToggleButton"
                 android:textOff="춤"
                 android:textOn="춤" />
@@ -159,7 +159,7 @@
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="@drawable/box_border"
+                android:background="@drawable/box_white"
                 android:text="ToggleButton"
                 android:textOff="게임"
                 android:textOn="게임" />
@@ -169,7 +169,7 @@
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="@drawable/box_border"
+                android:background="@drawable/box_white"
                 android:text="ToggleButton"
                 android:textOff="음식"
                 android:textOn="음식" />
@@ -179,7 +179,7 @@
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:background="@drawable/box_border"
+                android:background="@drawable/box_white"
                 android:text="ToggleButton"
                 android:textOff="기타"
                 android:textOn="기타" />
