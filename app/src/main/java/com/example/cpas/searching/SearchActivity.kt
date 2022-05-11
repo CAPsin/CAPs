@@ -98,7 +98,51 @@ class SearchActivity : AppCompatActivity() {
 
             override fun afterTextChanged(s: Editable?) {
                 //TODO("Not yet implemented")
-                Log.d("TAG", "텍스트 바뀜 ${s}")
+                database.addValueEventListener(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        array.clear()
+                        for (data in snapshot.children) {
+                            if ((data.child("title").value as String).contains(s.toString())) {
+                                val id = data.child("id").value as String
+                                val title = data.child("title").value as String
+                                val content = data.child("content").value as String
+                                val time = data.child("time").value as String
+                                val commentNum = data.child("commentNum").value
+                                val image = R.drawable.comment
+                                val who = data.child("who").value as String
+                                val epoch = data.child("epoch").value as String
+                                val postingID = data.child("postingID").value as String
+
+                                array.add(
+                                    Posting(
+                                        id,
+                                        "test",
+                                        title,
+                                        content,
+                                        time,
+                                        commentNum.toString(),
+                                        who,
+                                        image,
+                                        epoch,
+                                        postingID
+                                    )
+                                )
+                                Log.d("TAG", title)
+                            }
+                        }
+                        if (array.size > 1) {
+                            array.sortWith(Comparator { p0, p1 ->
+                                p0!!.epoch!!.toLong().compareTo(p1!!.epoch!!.toLong()) * -1
+                            })
+                        }
+                        rv.adapter?.notifyDataSetChanged()
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        Toast.makeText(applicationContext, "게시글을 불러 오지못했습니다", Toast.LENGTH_SHORT).show()
+                    }
+                })
+
             }
 
         }
