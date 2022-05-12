@@ -3,6 +3,7 @@ package com.example.cpas
 import android.animation.ObjectAnimator
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
@@ -27,7 +28,7 @@ import com.google.android.material.tabs.TabLayout
 
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
-    var flag : String = "job"
+    var flag : String = "job"//ㅇㅇ
     var isUp = false // 카테고리 애니메이션 상태표시
     //주석이다
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -97,8 +98,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     category_text.setTextSize(20F)
                     category_text.layoutParams = layoutParams
                     layoutParams.setMargins(changeDP(5), changeDP(12), changeDP(5), 0)
-                    category_text.setTextColor(Color.WHITE)
-                    //category_text.setCompoundDrawables(R.drawable.is_category_bolder,null,null,null)
+                    category_text.setTextColor(Color.parseColor("#6667AB"))
+                    category_text.setBackgroundResource(R.drawable.dialog_edittext_background)
                     category_line.addView(category_text)
                 }
 
