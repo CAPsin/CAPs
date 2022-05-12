@@ -10,12 +10,17 @@ import androidx.appcompat.widget.AppCompatButton
 import com.example.cpas.MainActivity
 import com.example.cpas.R
 import com.example.cpas.assign.AssignActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
 
 class LoginActivity : AppCompatActivity() {
+    private lateinit var auth : FirebaseAuth // 파이어 베이스 형식
+    private lateinit var databaseReference: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        auth = FirebaseAuth.getInstance()
 
         val user_email = intent.getStringExtra("email")
         val user_id = intent.getStringExtra("id")
@@ -34,22 +39,34 @@ class LoginActivity : AppCompatActivity() {
 
             Log.d("tag1", inputid.text.toString().equals(user_id).toString())
             Log.d("tag1", inputpass.text.toString().equals(user_password).toString())
-            if(inputid.text.toString().equals(user_id) && inputpass.text.toString().equals(user_password)){
-                val intent = Intent(this, MainActivity::class.java)
-                intent.putExtra("id", inputid.text.toString())
-                intent.putExtra("nickname", user_nickname)
-                intent.putExtra("email", user_email)
-                intent.putExtra("name", user_name)
-                intent.putExtra("password", user_password)
-                startActivity(intent)
-                finish()
-            }
-            else if(!(inputid.text.toString().equals(user_id))){
-                Toast.makeText(this, "아이디가 일치하지 않습니다", Toast.LENGTH_SHORT).show()
-            }
-            else if(!(inputpass.text.toString().equals(user_password))){
-                Toast.makeText(this, "비밀번호가 일치하지 않습니다", Toast.LENGTH_SHORT).show()
-            }
+            auth?.signInWithEmailAndPassword(inputid.text.toString(),inputpass.text.toString())
+                ?.addOnCompleteListener {
+                        task ->
+                    if(task.isSuccessful) {
+                        // Login, 아이디와 패스워드가 맞았을 때
+                        databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(auth.uid.toString())
+                        databaseReference.addValueEventListener(object : ValueEventListener {
+                            override fun onDataChange(snapshot: DataSnapshot) {
+                                val intent = Intent(applicationContext, MainActivity::class.java)
+                                intent.putExtra("id", snapshot.child("id").value.toString())
+                                intent.putExtra("nickname", snapshot.child("nickname").value.toString())
+                                intent.putExtra("email", snapshot.child("email").value.toString())
+                                intent.putExtra("name", snapshot.child("name").value.toString())
+                                intent.putExtra("password", snapshot.child("password").value.toString())
+                                startActivity(intent)
+                                finish()
+                            }
+
+                            override fun onCancelled(error: DatabaseError) {
+                            }
+
+                        })
+                        val intent = Intent(this, MainActivity::class.java)
+                    } else {
+                        // Show the error message, 아이디와 패스워드가 틀렸을 때
+                        Toast.makeText(this, task.exception?.message, Toast.LENGTH_LONG).show()
+                    }
+                }
         }
 
         assignbtn.setOnClickListener{
