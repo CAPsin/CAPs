@@ -41,7 +41,7 @@
         android:layout_margin="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout3"
         app:layout_constraintVertical_bias="0.0">
@@ -79,143 +79,30 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="224dp"
             android:text="카테고리를 선택해 주세요(복수 선택 가능)"
             android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@+id/gridLayout"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_addCategory"
+            android:layout_width="45dp"
+            android:layout_height="48dp"
+            app:layout_constraintStart_toStartOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:srcCompat="@drawable/plus" />
 
         <androidx.gridlayout.widget.GridLayout
             android:id="@+id/gridLayout"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             app:columnCount="4"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <ToggleButton
-                android:id="@+id/toggleButton1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ToggleButton"
-                android:textOff="여행"
-                android:textOn="선택됨" />
-
-            <ToggleButton
-                android:id="@+id/toggleButton2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ToggleButton"
-                android:textOff="스포츠"
-                android:textOn="선택됨" />
-
-            <ToggleButton
-                android:id="@+id/toggleButton3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ToggleButton"
-                android:textOff="레저"
-                android:textOn="선택됨" />
-
-            <ToggleButton
-                android:id="@+id/toggleButton4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ToggleButton"
-                android:textOff="책"
-                android:textOn="선택됨" />
-
-            <ToggleButton
-                android:id="@+id/toggleButton5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ToggleButton"
-                android:textOff="외국어"
-                android:textOn="선택됨" />
-
-            <ToggleButton
-                android:id="@+id/toggleButton6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ToggleButton"
-                android:textOff="문화"
-                android:textOn="선택됨" />
-
-            <ToggleButton
-                android:id="@+id/toggleButton7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ToggleButton"
-                android:textOff="음악"
-                android:textOn="선택됨" />
-
-            <ToggleButton
-                android:id="@+id/toggleButton8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ToggleButton"
-                android:textOff="미술/공예"
-                android:textOn="선택됨" />
-
-            <ToggleButton
-                android:id="@+id/toggleButton9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ToggleButton"
-                android:textOff="춤"
-                android:textOn="선택됨" />
-
-            <ToggleButton
-                android:id="@+id/toggleButton10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ToggleButton"
-                android:textOff="봉사활동"
-                android:textOn="선택됨" />
-
-            <ToggleButton
-                android:id="@+id/toggleButton11"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ToggleButton"
-                android:textOff="자동차"
-                android:textOn="선택됨" />
-
-            <ToggleButton
-                android:id="@+id/toggleButton12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ToggleButton"
-                android:textOff="게임"
-                android:textOn="선택됨" />
-
-            <ToggleButton
-                android:id="@+id/toggleButton13"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ToggleButton"
-                android:textOff="음식"
-                android:textOn="선택됨" />
-
-            <ToggleButton
-                android:id="@+id/toggleButton14"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ToggleButton"
-                android:textOff="반려동물"
-                android:textOn="선택됨" />
-
-            <ToggleButton
-                android:id="@+id/toggleButton15"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ToggleButton"
-                android:textOff="기타"
-                android:textOn="선택됨" />
-
-        </androidx.gridlayout.widget.GridLayout>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_addCategory" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

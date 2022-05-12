@@ -3,19 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/CAPs/app/src/main/res/drawable/category_text_background.xml" value="0.319" />
-        <entry key="..\:/CAPs/app/src/main/res/drawable/dialog_button_background.xml" value="0.319" />
-        <entry key="..\:/CAPs/app/src/main/res/drawable/dialog_edittext_background.xml" value="0.319" />
-        <entry key="..\:/CAPs/app/src/main/res/drawable/ic_baseline_add_box_24.xml" value="0.25" />
-        <entry key="..\:/CAPs/app/src/main/res/layout/activity_categorydialog.xml" value="0.5" />
-        <entry key="..\:/CAPs/app/src/main/res/layout/activity_changenickdialog.xml" value="0.5" />
-        <entry key="..\:/CAPs/app/src/main/res/layout/activity_main.xml" value="0.33" />
-        <entry key="..\:/CAPs/app/src/main/res/layout/activity_myinfo.xml" value="0.1875" />
-        <entry key="..\:/CAPs/app/src/main/res/layout/dialog_radius_background.xml" value="0.36614583333333334" />
-        <entry key="..\:/CAPs/app/src/main/res/layout/list_item.xml" value="0.1875" />
-        <entry key="..\:/CAPs/app/src/main/res/layout/myposing_fragment.xml" value="0.36614583333333334" />
-        <entry key="..\:/CAPs/app/src/main/res/layout/myposting_fragment.xml" value="0.22" />
+ main
         <entry key="..\:/Users/82103/Documents/CAPs/app/src/main/res/layout/activity_in_posting.xml" value="0.4" />
+        <entry key="..\:/Users/82103/Documents/CAPs/app/src/main/res/layout/activity_main.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/82103/Documents/CAPs/app/src/main/res/layout/activity_myinfo.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/82103/Documents/CAPs/app/src/main/res/layout/activity_writing.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/82103/Documents/GitHub/app/src/main/res/drawable/comment_frame.xml" value="0.1465" />
         <entry key="..\:/Users/82103/Documents/GitHub/app/src/main/res/drawable/ic_baseline_account_circle0_24.xml" value="0.1595" />
