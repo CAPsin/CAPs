@@ -1,19 +1,13 @@
-package com.example.cpas.home
+package com.example.cpas.profile
 
 import android.app.Dialog
 import android.content.Context
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
-import android.graphics.drawable.shapes.Shape
 import android.view.WindowManager
 import android.widget.EditText
 import com.example.cpas.R
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.dialog.MaterialDialogs
-import com.google.android.material.theme.overlay.MaterialThemeOverlay
 import kotlinx.android.synthetic.main.activity_categorydialog.*
 
-class CategoryDialog(context: Context)
+class ChangeNickDialog(context: Context)
 {
     private val dialog = Dialog(context)
     private lateinit var onClickListener: OnDialogClickListener
@@ -25,8 +19,7 @@ class CategoryDialog(context: Context)
 
     fun showDialog()
     {
-        dialog.setContentView(R.layout.activity_categorydialog)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.setContentView(R.layout.activity_changenickdialog)
         dialog.window!!.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT)
         dialog.setCanceledOnTouchOutside(false)
         dialog.setCancelable(false) // 다이얼로그 바깥 화면 눌렀을 때, 꺼지지 않음
@@ -42,6 +35,7 @@ class CategoryDialog(context: Context)
             onClickListener.onClicked(edit_name.text.toString()) //에티트에서 받은 스트링을 전달
             dialog.dismiss()
         }
+
     }
 
     interface OnDialogClickListener

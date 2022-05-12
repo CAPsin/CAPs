@@ -1,15 +1,14 @@
 package com.example.cpas.profile
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.cpas.R
 import com.example.cpas.assign.AssignActivity
+import com.example.cpas.home.CategoryDialog
 import com.example.cpas.login.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
@@ -37,6 +36,7 @@ class MyinfoActivity : AppCompatActivity() {
         val myposting : Button = findViewById(R.id.myposting)
         val removeuser : Button = findViewById(R.id.removeUser)
         val logout : Button = findViewById(R.id.logout)
+        val chageNick : Button = findViewById(R.id.changeNick)
 
         auth = FirebaseAuth.getInstance()
         databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(auth.uid.toString())
@@ -55,7 +55,32 @@ class MyinfoActivity : AppCompatActivity() {
             }
 
         })
+        chageNick.setOnClickListener {
+            val dialog = ChangeNickDialog(this) // 카테고리 다이얼로그 액티비티 받기
+            val category_text = TextView(this)
+            dialog.showDialog()
+            dialog.setOnClickListener(object : ChangeNickDialog.OnDialogClickListener {
+                override fun onClicked(name: String)
+                {
+                    FirebaseDatabase.getInstance().getReference("Users")
+                        .addListenerForSingleValueEvent(object : ValueEventListener {
+                            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                                if (dataSnapshot.child("nickname").value.toString() != name) {
+                                    FirebaseDatabase.getInstance().getReference("Users")
+                                        .child(auth.uid.toString()).child("nickname").setValue(name)
+                                    mynick.text = name
+                                    Toast.makeText(getApplicationContext(),"변경되었습니다.",Toast.LENGTH_LONG).show()
+                                } else {
+                                    Toast.makeText(getApplicationContext(),"중복입니다.",Toast.LENGTH_LONG).show()
+                                }
+                            }
 
+                            override fun onCancelled(databaseError: DatabaseError) {
+                            }
+                        })
+                }
+            })
+        }
         myposting.setOnClickListener {//내가 쓴 글 모아보기
             startActivity(Intent(this, MypostingFragment::class.java))
         }
@@ -73,7 +98,7 @@ class MyinfoActivity : AppCompatActivity() {
                 .setMessage("탈퇴하시겠습니까?")
                 .setPositiveButton("확인") { dialog, which ->
                     FirebaseAuth.getInstance().currentUser?.delete() // 데이터베이스 이메일 삭제 부분
-                    //FirebaseDatabase.getInstance().getReference("Users").child(auth.uid.toString()).removeValue() 리얼타임베이스 데이터 삭제 부분
+                    FirebaseDatabase.getInstance().getReference("Users").child(auth.uid.toString()).removeValue()
                     startActivity(Intent(this, LoginActivity::class.java))
                     finish()
                 }
@@ -84,6 +109,8 @@ class MyinfoActivity : AppCompatActivity() {
         revert.setOnClickListener {
             finish()
         }
+
+
     }
 }
 
