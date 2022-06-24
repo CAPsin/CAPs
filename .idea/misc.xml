@@ -3,7 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
- main
+        <entry key="..\:/CAPs/app/src/main/res/drawable/category_text_background.xml" value="0.319" />
         <entry key="..\:/Users/82103/Documents/CAPs/app/src/main/res/layout/activity_in_posting.xml" value="0.4" />
         <entry key="..\:/Users/82103/Documents/CAPs/app/src/main/res/layout/activity_main.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/82103/Documents/CAPs/app/src/main/res/layout/activity_myinfo.xml" value="0.25364583333333335" />
