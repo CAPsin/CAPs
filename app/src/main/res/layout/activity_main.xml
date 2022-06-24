@@ -119,17 +119,17 @@
                 android:id="@+id/iv_search"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toStartOf="@+id/iv_more"
+                app:layout_constraintEnd_toStartOf="@+id/iv_notification"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_baseline_search_45" />
 
             <ImageView
-                android:id="@+id/iv_more"
+                android:id="@+id/iv_notification"
                 android:layout_width="48dp"
                 android:layout_height="43dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_baseline_more_vert_45" />
+                app:srcCompat="@drawable/ic_baseline_notifications_24" />
 
             <TextView
                 android:id="@+id/tv_name"
@@ -138,7 +138,7 @@
                 android:text="이름"
                 android:textSize="24dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/iv_more"
+                app:layout_constraintEnd_toEndOf="@+id/iv_notification"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0" />

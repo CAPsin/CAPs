@@ -50,9 +50,11 @@ class SearchActivity : AppCompatActivity() {
                             val who = data.child("who").value as String
                             val epoch = data.child("epoch").value as String
                             val postingID = data.child("postingID").value as String
+                            val writerUid = data.child("writerUid").value as String
 
                             array.add(
                                 Posting(
+                                    writerUid,
                                     id,
                                     "test",
                                     title,
@@ -112,9 +114,11 @@ class SearchActivity : AppCompatActivity() {
                                 val who = data.child("who").value as String
                                 val epoch = data.child("epoch").value as String
                                 val postingID = data.child("postingID").value as String
+                                val writerUid = data.child("writerUid").value as String
 
                                 array.add(
                                     Posting(
+                                        writerUid,
                                         id,
                                         "test",
                                         title,

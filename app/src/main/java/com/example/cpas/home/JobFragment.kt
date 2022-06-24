@@ -1,6 +1,7 @@
 package com.example.cpas.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,6 +32,7 @@ class JobFragment(val who : String, val id : String) : Fragment() {
                 array.clear()
                 for(data in snapshot.children) {
                     if(data.child("type").value as String == "job") {
+                        Log.d("####", data.toString())
                         val id = data.child("id").value as String
                         val title = data.child("title").value as String
                         val content = data.child("content").value as String
@@ -40,8 +42,9 @@ class JobFragment(val who : String, val id : String) : Fragment() {
                         val who = data.child("who").value as String
                         val epoch = data.child("epoch").value as String
                         val postingID = data.child("postingID").value as String
+                        val writerUid = data.child("writerUid").value as String
 
-                        array.add(Posting(id, "job", title, content, time, commentNum.toString(), who, image, epoch, postingID))
+                        array.add(Posting(writerUid, id, "job", title, content, time, commentNum.toString(), who, image, epoch, postingID))
                     }
                 }
                 if(array.size > 1) {

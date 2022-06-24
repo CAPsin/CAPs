@@ -40,8 +40,9 @@ class NormalFragment(val who : String, val id : String) : Fragment() {
                         val who = data.child("who").value as String
                         val epoch = data.child("epoch").value as String
                         val postingID = data.child("postingID").value as String
+                        val writerUid = data.child("writerUid").value as String
 
-                        array.add(Posting(id, "normal", title, content, time, commentNum.toString(), who, image, epoch, postingID))
+                        array.add(Posting(writerUid, id, "normal", title, content, time, commentNum.toString(), who, image, epoch, postingID))
                     }
                 }
                 if(array.size > 1) {
