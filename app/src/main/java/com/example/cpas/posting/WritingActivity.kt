@@ -80,6 +80,7 @@ class WritingActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext, "내용을 입력해 주세요", Toast.LENGTH_SHORT).show()
             }
             else {
+                val writerUid = auth.currentUser!!.uid
                 val id : String? = intent.getStringExtra("id")
                 val type : String? = intent.getStringExtra("flag")
                 val tmp : String = title.text.toString()
@@ -92,7 +93,7 @@ class WritingActivity : AppCompatActivity() {
                 val who : String? = intent.getStringExtra("who")
 
                 database = FirebaseDatabase.getInstance().getReference("Postings")
-                val posting = Posting(id, type, tmp, tmp2, time, commentNum, who, R.drawable.comment, currentTimeMillis().toString(), postingID)
+                val posting = Posting(writerUid, id, type, tmp, tmp2, time, commentNum, who, R.drawable.comment, currentTimeMillis().toString(), postingID)
                 database.child(postingID).setValue(posting).addOnSuccessListener {
                     for (index in 0..14) { // 파이어베이스에 카테고리도 추가하기
                         if(selected[index]) {

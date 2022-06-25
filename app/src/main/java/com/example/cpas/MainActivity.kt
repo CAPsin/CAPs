@@ -16,10 +16,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.viewpager.widget.ViewPager
-import com.example.cpas.home.CategoryDialog
-import com.example.cpas.home.JobFragment
-import com.example.cpas.home.NormalFragment
-import com.example.cpas.home.PagerAdapter
+import com.example.cpas.home.*
 import com.example.cpas.planner.PlannerActivity
 import com.example.cpas.posting.WritingActivity
 import com.example.cpas.profile.MyinfoActivity
@@ -27,7 +24,7 @@ import com.example.cpas.searching.SearchActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayout
-
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
     var flag : String = "job"//ㅇㅇ
@@ -39,7 +36,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         //코드작성 예시
         //테스트2
         val search : ImageView = findViewById(R.id.iv_search)
-        val more : ImageView = findViewById(R.id.iv_more)
+        val notification : ImageView = findViewById(R.id.iv_notification)
         val category : ImageView = findViewById(R.id.iv_category)
         val category_plus : ImageButton = findViewById(R.id.btn_cateplus) //카테고리 플러스 버튼
         val category_line : LinearLayout = findViewById(R.id.category_line) //카테고리 삽입하기 위한 부모 레이어
@@ -81,9 +78,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             isUp = !isUp
         }
 
-        more.setOnClickListener {
-            val drawer : DrawerLayout = findViewById(R.id.layout_drawer)
-            drawer.openDrawer(GravityCompat.END)
+        iv_notification.setOnClickListener {
+            val intent = Intent(this, NotificationActivity::class.java)
+            startActivity(intent)
         }
         category_plus.setOnClickListener { //카테고리 추가 버튼
             val layoutParams = LinearLayout.LayoutParams(
