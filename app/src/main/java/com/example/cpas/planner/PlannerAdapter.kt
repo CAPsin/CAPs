@@ -1,6 +1,7 @@
 package com.example.cpas.planner
 
 import android.app.Activity
+import android.content.ClipData
 import android.content.Context
 import android.content.Intent
 import android.util.Log
@@ -45,14 +46,19 @@ class PlannerAdapter(private val context: Context, private val plannerActivity: 
             }
 
         })
-        holder.itemView.setOnClickListener {
+
+        holder.itemView.setOnTouchListener(View.OnTouchListener { v, arg1 -> // TODO Auto-generated method stub
             Log.d("Tag", planList[position] + planList.size)
             if (position == planList.size - 1) {
                 val intent = Intent(context, SetPlanActivity::class.java)
                 intent.putExtra("id", userId)
                 ActivityCompat.startActivityForResult(holder.itemView.context as Activity,intent,101,null)
             }
-        }
+            val data = ClipData.newPlainText("${holder.button.text}계획 객체", "${holder.button.text}")
+            val shadow = View.DragShadowBuilder(holder.itemView)
+            v.startDrag(data, shadow, null, 0)
+            false
+        })
     }
 
     override fun getItemCount(): Int {

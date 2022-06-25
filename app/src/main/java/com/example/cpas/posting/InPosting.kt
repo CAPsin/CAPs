@@ -20,6 +20,7 @@ import java.util.*
 class InPosting : AppCompatActivity() {
 
     private lateinit var database : DatabaseReference
+    private lateinit var database2 : DatabaseReference
     private lateinit var array : ArrayList<Comment>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,12 +29,13 @@ class InPosting : AppCompatActivity() {
         array = ArrayList()
 
         val ptitle = intent.getStringExtra("ptitle")
-        val ptime = intent.getStringExtra("ptime")
+        //val ptime = intent.getStringExtra("ptime")
         val pwho = intent.getStringExtra("pwho")
         val pcontent = intent.getStringExtra("pcontent")
-        val pID = intent.getStringExtra("pID")
-        val cwho = intent.getStringExtra("cWho")
-        val cID = intent.getStringExtra("cID")
+        val pID = intent.getStringExtra("pID")!!
+        val cwho = intent.getStringExtra("cWho")!!
+        val cID = intent.getStringExtra("cID")!!
+        val writerUid = intent.getStringExtra("writerUid")!!
 
         val title : TextView = findViewById(R.id.postingTitle)
         val who : TextView = findViewById(R.id.postPerson)
@@ -49,7 +51,8 @@ class InPosting : AppCompatActivity() {
 
         //firebase에서 글 정보 읽어오기
         var commentNum : Long = 0
-        database = FirebaseDatabase.getInstance().getReference("Postings").child(pID!!)
+        database = FirebaseDatabase.getInstance().getReference("Postings").child(pID)
+        database2 = FirebaseDatabase.getInstance().getReference("Users").child(writerUid)
         database.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 time.text = snapshot.child("time").value.toString()
@@ -65,17 +68,17 @@ class InPosting : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 array.clear()
                 for(data in snapshot.children) {
-                    val who = data.child("who").value as String
+                    val who2 = data.child("who").value as String
                     val id = data.child("id").value as String
-                    val content = data.child("content").value as String
-                    val time = data.child("time").value as String
+                    val content2 = data.child("content").value as String
+                    val time2 = data.child("time").value as String
                     val epoch = data.child("epoch").value as String
                     val commentID = data.child("commentID").value as String
 
-                    array.add(Comment(who, id, content, time, epoch, commentID))
+                    array.add(Comment(who2, id, content2, time2, epoch, commentID))
                 }
                 if(array.size > 1) {
-                    array.sortWith(Comparator { p0, p1 -> p0!!.epoch!!.toLong().compareTo(p1!!.epoch!!.toLong())})
+                    array.sortWith(Comparator { p0, p1 -> p0!!.epoch.toLong().compareTo(p1!!.epoch.toLong())})
                 }
                 rv.adapter?.notifyDataSetChanged()
             }
@@ -111,18 +114,30 @@ class InPosting : AppCompatActivity() {
             }
             else {
                 val sdf = SimpleDateFormat("yyyy/MM/dd hh:mm:ss")
-                val time : String = sdf.format(Date())
+                val time3 : String = sdf.format(Date())
                 val commentID : String = cID + "@" + Date()
 
-                val comment = Comment(cwho!!, cID!!, ccontent.text.toString(), time, currentTimeMillis().toString(), commentID)
-                database.child("comment").child(commentID).setValue(comment).addOnSuccessListener {
-                    database.child("commentNum").setValue(commentNum.toString())
-                    rvParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
-                    rv.layoutParams = rvParams
-                    ccontent.text.clear()
-                    closeKeyboard()
-                }.addOnCanceledListener {
-                    Toast.makeText(applicationContext, "댓글을 게시하지 못했습니다", Toast.LENGTH_SHORT).show()
+                val comment = Comment(cwho, cID, ccontent.text.toString(), time3, currentTimeMillis().toString(), commentID)
+                database.child("comment").child(commentID).setValue(comment).addOnCompleteListener { task ->
+                    if(task.isSuccessful) {
+                        database.child("commentNum").setValue(commentNum.toString())
+                        rvParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
+                        rv.layoutParams = rvParams
+
+                        val notification = Notification(ccontent.text.toString(), ptitle!!, pwho!!, pcontent!!, pID, cwho, cID, time3, writerUid, commentID, currentTimeMillis().toString())
+                        database2.child("notification").child(commentID).setValue(notification).addOnCompleteListener {
+                            if(it.isSuccessful) {
+                                Toast.makeText(applicationContext, "댓글을 게시했습니다", Toast.LENGTH_SHORT).show()
+                            } else {
+                                Toast.makeText(applicationContext, "댓글을 게시하지 못했습니다", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+
+                        ccontent.text.clear()
+                        closeKeyboard()
+                    } else {
+                        Toast.makeText(applicationContext, "댓글을 게시하지 못했습니다", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         }
