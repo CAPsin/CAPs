@@ -1,8 +1,12 @@
 package com.example.cpas.planner
 
 import android.app.DatePickerDialog
+import android.content.ClipData
 import android.os.Bundle
 import android.util.Log
+import android.view.DragEvent
+import android.view.View
+import android.view.View.*
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.cpas.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import org.w3c.dom.Text
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -27,7 +32,10 @@ class PlannerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_planner)
+        var include_planlist = arrayListOf<String>()
 
+        var include_plan : TextView = findViewById(R.id.include_plan)
+        val planGraph : View = findViewById(R.id.plannerGraph)
         val pickdate : TextView = findViewById(R.id.pickdate)
         var id = intent.getStringExtra("id")
 
@@ -113,6 +121,36 @@ class PlannerActivity : AppCompatActivity() {
             }
             DatePickerDialog(this, dateSetListener, year,month,day).show()
         }
+
+        planGraph.setOnDragListener(OnDragListener { v, event -> // TODO Auto-generated method stub
+            val action = event.action
+            when (action) {
+                DragEvent.ACTION_DRAG_STARTED -> {
+                }
+                DragEvent.ACTION_DRAG_EXITED -> {
+                    Log.d("TAG","나감")
+                }
+                DragEvent.ACTION_DRAG_ENTERED -> { // 드래그 실패
+                    Log.d("TAG","들어옴")
+                }
+                DragEvent.ACTION_DROP -> { // 드래그 성공
+                    Log.d("TAG",event.clipData.getItemAt(0).text.toString())
+                    include_planlist.add(event.clipData.getItemAt(0).text.toString())
+                    var temptext = ""
+                    for(i in 0 .. include_planlist.size - 1){
+                        temptext += include_planlist.get(i)
+                        temptext += ", "
+                    }
+                    include_plan.text = "현재 : " + temptext
+                }
+                DragEvent.ACTION_DRAG_ENDED -> {
+
+                }
+                else -> {
+                }
+            }
+            true
+        })
     }
 
 }
