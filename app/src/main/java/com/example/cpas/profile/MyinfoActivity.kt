@@ -62,16 +62,17 @@ class MyinfoActivity : AppCompatActivity() {
             dialog.setOnClickListener(object : ChangeNickDialog.OnDialogClickListener {
                 override fun onClicked(name: String)
                 {
-                    FirebaseDatabase.getInstance().getReference("Users")
+                    FirebaseDatabase.getInstance().getReference("Users").orderByChild("nickname").equalTo(name)
                         .addListenerForSingleValueEvent(object : ValueEventListener {
                             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                                if (dataSnapshot.child("nickname").value.toString() != name) {
+                                if (dataSnapshot.exists()) {
+                                    Toast.makeText(getApplicationContext(),"중복입니다.",Toast.LENGTH_LONG).show()
+
+                                } else {
                                     FirebaseDatabase.getInstance().getReference("Users")
                                         .child(auth.uid.toString()).child("nickname").setValue(name)
                                     mynick.text = name
                                     Toast.makeText(getApplicationContext(),"변경되었습니다.",Toast.LENGTH_LONG).show()
-                                } else {
-                                    Toast.makeText(getApplicationContext(),"중복입니다.",Toast.LENGTH_LONG).show()
                                 }
                             }
 
@@ -99,7 +100,7 @@ class MyinfoActivity : AppCompatActivity() {
                 .setPositiveButton("확인") { dialog, which ->
                     FirebaseAuth.getInstance().currentUser?.delete() // 데이터베이스 이메일 삭제 부분
                     FirebaseDatabase.getInstance().getReference("Users").child(auth.uid.toString()).removeValue()
-                    startActivity(Intent(this, LoginActivity::class.java))
+                    startActivity(Intent(this,LoginActivity::class.java))
                     finish()
                 }
                 .setNegativeButton("취소",null)
