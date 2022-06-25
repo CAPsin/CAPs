@@ -61,7 +61,6 @@ class LoginActivity : AppCompatActivity() {
                             }
 
                         })
-                        val intent = Intent(this, MainActivity::class.java)
                     } else {
                         // Show the error message, 아이디와 패스워드가 틀렸을 때
                         Toast.makeText(this, task.exception?.message, Toast.LENGTH_LONG).show()

@@ -31,6 +31,7 @@ class MypostingFragment : AppCompatActivity(){
         val pageradapter = PagerAdapter(supportFragmentManager)
         pageradapter.addFragment(
             MyJobFragment(
+                //오류
                 intent.getStringExtra("name")!!,
                 intent.getStringExtra("id")!!
             )
