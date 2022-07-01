@@ -22,11 +22,12 @@ class NotificationAdapter(private val notificationList : ArrayList<Notification>
     lateinit var database : DatabaseReference
 
     fun removeItem(pos : Int) {
-        database.child(notificationList[pos].commentID).removeValue().addOnCompleteListener {
-            if(it.isSuccessful) {
-                notifyItemRemoved(pos)
-            }
-        }
+        database.child(notificationList[pos].commentID).removeValue()
+//        database.child(notificationList[pos].commentID).removeValue().addOnCompleteListener {
+//            if(it.isSuccessful) {
+//                notifyItemRemoved(pos)
+//            }
+//        }
     }
 
     inner class CustomViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -40,7 +41,7 @@ class NotificationAdapter(private val notificationList : ArrayList<Notification>
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-        database = FirebaseDatabase.getInstance().getReference("Users").child(notificationList[position].writerUid).child("notification")
+        database = FirebaseDatabase.getInstance().getReference("Notifications").child(notificationList[position].writerUid)
 
         var title = if(notificationList[position].pTitle.length > 15) notificationList[position].pTitle.substring(0..14) + ".." else notificationList[position].pTitle
         title = "'$title' 글에 댓글이 달렸습니다"
