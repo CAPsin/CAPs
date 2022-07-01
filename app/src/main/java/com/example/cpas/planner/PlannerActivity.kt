@@ -10,6 +10,8 @@ import android.view.View.*
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cpas.R
 import com.google.firebase.auth.FirebaseAuth
@@ -56,6 +58,10 @@ class PlannerActivity : AppCompatActivity() {
         //리사이클러 뷰
         var planListView = findViewById<RecyclerView>(R.id.planRecyclerView)
 
+        //그리드 레이아웃을 위함
+        val gridLayoutManager = GridLayoutManager(applicationContext, 4)
+        gridLayoutManager.orientation = LinearLayoutManager.VERTICAL
+        planListView.layoutManager = gridLayoutManager
         planAdapter = PlannerAdapter(this, this)
         planListView.adapter = planAdapter
         planDataList.add("+")
