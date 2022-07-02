@@ -24,17 +24,28 @@ import com.example.cpas.searching.SearchActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayout
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.iid.FirebaseInstanceId
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
     var flag : String = "job"//ㅇㅇ
     var isUp = false // 카테고리 애니메이션 상태표시
+    lateinit var firebaseInstanceId : FirebaseInstanceId
+    lateinit var auth : FirebaseAuth
+    lateinit var database : DatabaseReference
     //주석이다
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         //코드작성 예시
         //테스트2
+        firebaseInstanceId = FirebaseInstanceId.getInstance()
+        auth = FirebaseAuth.getInstance()
+        database = FirebaseDatabase.getInstance().getReference("Tokens")
         val search : ImageView = findViewById(R.id.iv_search)
         val notification : ImageView = findViewById(R.id.iv_notification)
         val category : ImageView = findViewById(R.id.iv_category)
@@ -124,36 +135,63 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val tabLayout : TabLayout = findViewById(R.id.tabLayout)
 
         val pageradapter = PagerAdapter(supportFragmentManager)
-        pageradapter.addFragment(JobFragment(intent.getStringExtra("nickname")!!, intent.getStringExtra("id")!!))
-        pageradapter.addFragment(NormalFragment(intent.getStringExtra("nickname")!!, intent.getStringExtra("id")!!))
+
+        val jobFrag = JobFragment()
+        val normalFrag = NormalFragment()
+        val nickname = intent.getStringExtra("nickname")!!
+        val id = intent.getStringExtra("id")!!
+        val bundle = Bundle(2)
+        bundle.putString("param1", nickname)
+        bundle.putString("param2", id)
+
+        jobFrag.arguments = bundle
+        normalFrag.arguments = bundle
+
+        pageradapter.addFragment(jobFrag)
+        pageradapter.addFragment(normalFrag)
+
         viewPager.adapter = pageradapter
         tabLayout.setupWithViewPager(viewPager)
-
 
         search.setOnClickListener {
             val intent = Intent(this, SearchActivity::class.java)
             startActivity(intent)
 
         }
+
+        sendToken()
     }
+
+    private fun sendToken() {
+        firebaseInstanceId.instanceId.addOnCompleteListener {
+            if(!it.isSuccessful) {
+                Log.e("getInstanceId failed", it.exception.toString())
+                return@addOnCompleteListener
+            }
+            val token = it.result!!.token
+            val uid = auth.currentUser!!.uid
+            database.child(uid).setValue(token)
+        }
+    }
+
     private fun changeDP(value : Int) : Int{
         var displayMetrics = resources.displayMetrics
         var dp = Math.round(value * displayMetrics.density)
         return dp
     }
-    private fun setFrag(fragNum : Int) {
-        val ft = supportFragmentManager.beginTransaction()
-        when(fragNum) {
-            0 -> {
-                ft.replace(R.id.main_frame, JobFragment(intent.getStringExtra("nickname")!!, intent.getStringExtra("id")!!)).commit()
-                flag = "job"
-            }
-            1 -> {
-                ft.replace(R.id.main_frame, NormalFragment(intent.getStringExtra("nickname")!!, intent.getStringExtra("id")!!)).commit()
-                flag = "normal"
-            }
-        }
-    }
+//    private fun setFrag(fragNum : Int) {
+//        val ft = supportFragmentManager.beginTransaction()
+//        when(fragNum) {
+//            0 -> {
+//                ft.replace(R.id.main_frame, JobFragment(intent.getStringExtra("nickname")!!, intent.getStringExtra("id")!!)).commit()
+//                flag = "job"
+//            }
+//            1 -> {
+//                ft.replace(R.id.main_frame, NormalFragment(intent.getStringExtra("nickname")!!, intent.getStringExtra("id")!!)).commit()
+//                flag = "normal"
+//            }
+//        }
+//    }
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.tmp1 -> {
