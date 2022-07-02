@@ -9,10 +9,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <service
+            android:name=".posting.MyFirebaseMessagingService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
         <activity
             android:name=".home.NotificationActivity"
             android:exported="false" />
-
         <activity
             android:name=".searching.SearchActivity"
             android:exported="false" />
@@ -22,7 +30,6 @@
         <activity
             android:name=".planner.PlannerActivity"
             android:exported="true" />
-
         <activity
             android:name=".posting.InPosting"
             android:exported="true" />

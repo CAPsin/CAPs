@@ -15,10 +15,20 @@ import com.google.firebase.database.*
 import kotlin.Comparator
 import kotlin.collections.ArrayList
 
-class NormalFragment(val who : String, val id : String) : Fragment() {
+class NormalFragment() : Fragment() {
 
     private lateinit var database : DatabaseReference
     private lateinit var array : ArrayList<Posting>
+    private var who: String? = null
+    private var id: String? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            who = it.getString("param1")
+            id = it.getString("param2")
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.normal_fragment, container, false)
@@ -58,7 +68,7 @@ class NormalFragment(val who : String, val id : String) : Fragment() {
 
         rv.layoutManager = LinearLayoutManager(null)
         rv.setHasFixedSize(true)
-        rv.adapter = PostingAdapter(array, who, id)
+        rv.adapter = PostingAdapter(array, who!!, id!!)
 
         return view
     }
