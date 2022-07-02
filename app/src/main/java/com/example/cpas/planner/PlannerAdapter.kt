@@ -41,8 +41,14 @@ class PlannerAdapter(private val context: Context, private val plannerActivity: 
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-        holder.plan_title.text = planList[position]
-        holder.plan_level.text = "보통"
+        if (position == planList.size - 1) {
+            holder.plan_title.text = "+"
+            holder.plan_level.text = "추가"
+        }
+        else{
+            holder.plan_title.text = planList[position]
+            holder.plan_level.text = "보통"
+        }
         databaseReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 userId = snapshot.child("id").value.toString()
@@ -54,26 +60,33 @@ class PlannerAdapter(private val context: Context, private val plannerActivity: 
         })
 
 
-        holder.itemView.setOnTouchListener(View.OnTouchListener { v, arg1 -> // TODO Auto-generated method stub
+        holder.itemView.setOnClickListener {  // TODO Auto-generated method stub
             Log.d("Tag", planList[position] + planList.size)
             if (position == planList.size - 1) {
                 val intent = Intent(context, SetPlanActivity::class.java)
                 intent.putExtra("id", userId)
-                ActivityCompat.startActivityForResult(holder.itemView.context as Activity,intent,101,null)
+                ActivityCompat.startActivityForResult(
+                    holder.itemView.context as Activity,
+                    intent,
+                    101,
+                    null
+                )
             }
             false
-        })
+        }
 
         holder.itemView.setOnLongClickListener ( View.OnLongClickListener { v->
             Log.d("Tag", planList[position] + planList.size)
             if (position == planList.size - 1) {
+                true
+            }
+            else{
+                Toast.makeText(context, "계획표로 이동!", Toast.LENGTH_SHORT).show()
+                val data = ClipData.newPlainText("${holder.plan_title.text}계획 객체", "${holder.plan_title.text}")
+                val shadow = View.DragShadowBuilder(holder.itemView)
+                v.startDrag(data, shadow, null, 0)
                 false
             }
-            Toast.makeText(context, "계획표로 이동!", Toast.LENGTH_SHORT).show()
-            val data = ClipData.newPlainText("${holder.plan_title.text}계획 객체", "${holder.plan_title.text}")
-            val shadow = View.DragShadowBuilder(holder.itemView)
-            v.startDrag(data, shadow, null, 0)
-            false
         } )
     }
 

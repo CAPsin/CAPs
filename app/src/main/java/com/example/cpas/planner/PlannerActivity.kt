@@ -9,6 +9,7 @@ import android.view.View
 import android.view.View.*
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -35,7 +36,7 @@ class PlannerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_planner)
         var include_planlist = arrayListOf<String>()
-
+        var flag = true
         var include_plan : TextView = findViewById(R.id.include_plan)
         val planGraph : View = findViewById(R.id.plannerGraph)
         val pickdate : TextView = findViewById(R.id.pickdate)
@@ -141,13 +142,22 @@ class PlannerActivity : AppCompatActivity() {
                 }
                 DragEvent.ACTION_DROP -> { // 드래그 성공
                     Log.d("TAG",event.clipData.getItemAt(0).text.toString())
-                    include_planlist.add(event.clipData.getItemAt(0).text.toString())
-                    var temptext = ""
                     for(i in 0 .. include_planlist.size - 1){
-                        temptext += include_planlist.get(i)
-                        temptext += ", "
+                        if((event.clipData.getItemAt(0).text.toString()).equals(include_planlist.get(i))){
+                            Toast.makeText(this,"이미 존재하는 계획입니다.", Toast.LENGTH_SHORT).show()
+                            flag = false
+                        }
                     }
-                    include_plan.text = "현재 : " + temptext
+                    if(flag){
+                        include_planlist.add(event.clipData.getItemAt(0).text.toString())
+                        var temptext = ""
+                        for(i in 0 .. include_planlist.size - 1){
+                            temptext += include_planlist.get(i)
+                            temptext += ", "
+                        }
+                        include_plan.text = "현재 : " + temptext
+                    }
+                    flag = true
                 }
                 DragEvent.ACTION_DRAG_ENDED -> {
 
