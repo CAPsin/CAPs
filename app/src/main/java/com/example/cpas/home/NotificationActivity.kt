@@ -32,10 +32,9 @@ class NotificationActivity : AppCompatActivity() {
         array = ArrayList()
         val recyclerView = binding.notificationRv
         auth = FirebaseAuth.getInstance()
-        database = FirebaseDatabase.getInstance().getReference("Users").child(auth.currentUser!!.uid).child("notification")
+        database = FirebaseDatabase.getInstance().getReference("Notifications").child(auth.currentUser!!.uid)
         database.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                Log.d("####", "onDataChange")
                 array.clear()
                 for(data in snapshot.children) {
                     val comment = data.child("comment").value as String

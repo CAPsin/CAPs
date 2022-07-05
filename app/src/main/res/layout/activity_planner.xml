@@ -27,6 +27,7 @@
         android:layout_height="244dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
+        android:elevation="5dp"
         android:layout_marginTop="71dp"
         android:background="@drawable/testgraphelipse">
 
@@ -43,6 +44,78 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <TextView
+        android:id="@+id/nowplan"
+        android:layout_width="101dp"
+        android:layout_height="19dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="top"
+        android:text="현재 계획 : 7개"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout7"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/comfail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="282dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="top"
+        android:text="성공 : 3      실패 : 4"
+        android:textColor="#4AF138"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout7"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout7"
+        android:layout_width="330dp"
+        android:layout_height="200dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="453dp"
+        android:background="@drawable/plan_shape"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/planRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/plan_item" />
+        <!--<androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/plannerGraph"
+            app:layout_constraintVertical_bias="1"
+            >
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/planRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/plan_item" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>-->
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
     <ImageButton
         android:id="@+id/calendarButton"
         android:layout_width="50dp"
@@ -51,25 +124,6 @@
         android:background="@drawable/ic_baseline_calendar_month_24"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/plannerGraph"
-        app:layout_constraintVertical_bias="1"
-        >
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/planRecyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/plan_item" />
-
-    </androidx.appcompat.widget.LinearLayoutCompat>
 
 
 

@@ -46,17 +46,17 @@ class MypostingFragment : AppCompatActivity(){
         tabLayout.setupWithViewPager(viewPager)
     }
 
-    private fun setFrag(fragNum : Int) {
-        val ft = supportFragmentManager.beginTransaction()
-        when(fragNum) {
-            0 -> {
-                ft.replace(R.id.main_frame, JobFragment(intent.getStringExtra("nickname")!!, intent.getStringExtra("id")!!)).commit()
-                flag = "job"
-            }
-            1 -> {
-                ft.replace(R.id.main_frame, NormalFragment(intent.getStringExtra("nickname")!!, intent.getStringExtra("id")!!)).commit()
-                flag = "normal"
-            }
-        }
-    }
+//    private fun setFrag(fragNum : Int) {
+//        val ft = supportFragmentManager.beginTransaction()
+//        when(fragNum) {
+//            0 -> {
+//                ft.replace(R.id.main_frame, JobFragment(intent.getStringExtra("nickname")!!, intent.getStringExtra("id")!!)).commit()
+//                flag = "job"
+//            }
+//            1 -> {
+//                ft.replace(R.id.main_frame, NormalFragment(intent.getStringExtra("nickname")!!, intent.getStringExtra("id")!!)).commit()
+//                flag = "normal"
+//            }
+//        }
+//    }
 }
