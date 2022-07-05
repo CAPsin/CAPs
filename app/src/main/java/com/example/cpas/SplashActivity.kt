@@ -4,14 +4,11 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
 import com.example.cpas.login.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
 class SplashActivity : AppCompatActivity() {
-
-    private val SPLASH_TIME_OUT:Long = 3000 // 1 sec
     private lateinit var auth : FirebaseAuth // 파이어 베이스 형식
     private lateinit var databaseReference: DatabaseReference
     public lateinit var  context_main : Context
@@ -30,12 +27,11 @@ class SplashActivity : AppCompatActivity() {
         context_main = this
         auth = FirebaseAuth.getInstance()
         databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(auth.uid.toString())
+
         if(auth.uid == null){
-            Handler().postDelayed({
-                val intent = Intent(this@SplashActivity, LoginActivity::class.java)
-                startActivity(intent)
-                finish()
-            }, SPLASH_TIME_OUT)
+            val intent = Intent(this@SplashActivity, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
         }
         else{
             databaseReference.addValueEventListener(object : ValueEventListener {
@@ -57,16 +53,14 @@ class SplashActivity : AppCompatActivity() {
     }
 
     fun nextActivity(){
-        Handler().postDelayed({
-            val intent = Intent(this@SplashActivity, MainActivity::class.java)
-            intent.putExtra("email", userInfoArr[email])
-            intent.putExtra("id", userInfoArr[id])
-            intent.putExtra("name", userInfoArr[name])
-            intent.putExtra("nickname", userInfoArr[nickname])
-            intent.putExtra("password", userInfoArr[password])
-            startActivity(intent)
-            finish()
-        }, SPLASH_TIME_OUT)
+        val intent = Intent(this@SplashActivity, MainActivity::class.java)
+        intent.putExtra("email", userInfoArr[email])
+        intent.putExtra("id", userInfoArr[id])
+        intent.putExtra("name", userInfoArr[name])
+        intent.putExtra("nickname", userInfoArr[nickname])
+        intent.putExtra("password", userInfoArr[password])
+        startActivity(intent)
+        finish()
     }
 
     public fun getData(i : Int): String? {

@@ -40,6 +40,7 @@ class MyinfoActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
         databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(auth.uid.toString())
+
         databaseReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 userInfoArr[email] = snapshot.child("email").value.toString()
@@ -98,7 +99,7 @@ class MyinfoActivity : AppCompatActivity() {
                 .setMessage("탈퇴하시겠습니까?")
                 .setPositiveButton("확인") { dialog, which ->
                     FirebaseAuth.getInstance().currentUser?.delete() // 데이터베이스 이메일 삭제 부분
-                    FirebaseDatabase.getInstance().getReference("dd").child(auth.uid.toString()).removeValue()
+                    FirebaseDatabase.getInstance().getReference("Users").child(auth.uid.toString()).removeValue()
                     startActivity(Intent(this,LoginActivity::class.java))
                     finish()
                 }
