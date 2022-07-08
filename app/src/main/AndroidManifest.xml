@@ -9,6 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity
+            android:name=".posting.LetterActivity"
+            android:exported="false" />
+
         <service
             android:name=".posting.MyFirebaseMessagingService"
             android:enabled="true"

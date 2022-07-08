@@ -1,6 +1,7 @@
 package com.example.cpas.posting
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.ViewGroup
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.cpas.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import kotlinx.android.synthetic.main.activity_in_posting.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import okhttp3.MediaType
@@ -132,6 +134,12 @@ class InPosting : AppCompatActivity() {
             rvParams.width = display.width - display.width/12
             rvParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
             rv.layoutParams = rvParams
+
+            postPerson.setOnClickListener {
+                val intent = Intent(this, LetterActivity::class.java)
+                intent.putExtra("toToken", toToken)
+                startActivity(intent)
+            }
 
             postBtn.setOnClickListener {
                 if(ccontent.text.toString().trim() == "") {
