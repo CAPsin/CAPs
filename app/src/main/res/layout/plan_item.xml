@@ -30,7 +30,7 @@
         android:layout_height="89dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:background="@drawable/plan_rect" >
+        android:background="#E2D2D2" >
 
             <TextView
                 android:id="@+id/plan_title"

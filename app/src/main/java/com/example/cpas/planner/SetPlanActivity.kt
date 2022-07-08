@@ -62,7 +62,8 @@ class SetPlanActivity : AppCompatActivity() {
             } else {
                 val data = mapOf<String, String>(
                     "title" to editplan.text.toString(),
-                    "time" to "0"
+                    "time" to "0",
+                    "color" to (1..10).random().toString()
                 )
 
 
@@ -80,5 +81,8 @@ class SetPlanActivity : AppCompatActivity() {
         cancleButton.setOnClickListener {  // 뒤로가기 버튼 해당 엑티비티 종료
             finish()
         }
+
     }
+
+
 }

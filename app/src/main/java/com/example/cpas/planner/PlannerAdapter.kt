@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.ClipData
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -21,7 +22,7 @@ import kotlinx.coroutines.NonDisposableHandle.parent
 
 class PlannerAdapter(private val context: Context, private val plannerActivity: PlannerActivity) :
     RecyclerView.Adapter<PlannerAdapter.CustomViewHolder>() {
-    var planList = mutableListOf<String>()
+    var planList = mutableListOf<planData>()
     private lateinit var userId : String
     private var auth : FirebaseAuth = FirebaseAuth.getInstance() // 파이어 베이스 형식
     private var databaseReference: DatabaseReference = FirebaseDatabase.getInstance().getReference("Users").child(auth.uid.toString())
@@ -46,8 +47,21 @@ class PlannerAdapter(private val context: Context, private val plannerActivity: 
             holder.plan_level.text = "추가"
         }
         else{
-            holder.plan_title.text = planList[position]
+            holder.plan_title.text = planList[position].title
             holder.plan_level.text = "보통"
+            when (planList[position].color.toInt()){
+                0 -> holder.button.setBackgroundColor(Color.parseColor("#E2D2D2"))
+                1 -> holder.button.setBackgroundColor(Color.parseColor("#E3E2B4"))
+                2 -> holder.button.setBackgroundColor(Color.parseColor("#A2B59F"))
+                3 -> holder.button.setBackgroundColor(Color.parseColor("#D18063"))
+                4 -> holder.button.setBackgroundColor(Color.parseColor("#A9CBD7"))
+                5 -> holder.button.setBackgroundColor(Color.parseColor("#FFDDFF"))
+                6 -> holder.button.setBackgroundColor(Color.parseColor("#DDFFF6"))
+                7 -> holder.button.setBackgroundColor(Color.parseColor("#CCDDEE"))
+                8 -> holder.button.setBackgroundColor(Color.parseColor("#BBBBBB"))
+                9 -> holder.button.setBackgroundColor(Color.parseColor("#EECCE5"))
+                10 -> holder.button.setBackgroundColor(Color.parseColor("#FFFFDD"))
+            }
         }
         databaseReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -60,8 +74,8 @@ class PlannerAdapter(private val context: Context, private val plannerActivity: 
         })
 
 
+
         holder.itemView.setOnClickListener {  // TODO Auto-generated method stub
-            Log.d("Tag", planList[position] + planList.size)
             if (position == planList.size - 1) {
                 val intent = Intent(context, SetPlanActivity::class.java)
                 intent.putExtra("id", userId)
@@ -76,7 +90,6 @@ class PlannerAdapter(private val context: Context, private val plannerActivity: 
         }
 
         holder.itemView.setOnLongClickListener ( View.OnLongClickListener { v->
-            Log.d("Tag", planList[position] + planList.size)
             if (position == planList.size - 1) {
                 true
             }
