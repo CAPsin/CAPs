@@ -3,9 +3,11 @@ package com.example.cpas.profile
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.os.StrictMode
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import com.example.cpas.R
 import com.example.cpas.assign.AssignActivity
 import com.example.cpas.home.CategoryDialog
@@ -36,7 +38,8 @@ class MyinfoActivity : AppCompatActivity() {
         val myposting : Button = findViewById(R.id.myposting)
         val removeuser : Button = findViewById(R.id.removeUser)
         val logout : Button = findViewById(R.id.logout)
-        val chageNick : Button = findViewById(R.id.changeNick)
+        val chageNick : ImageView = findViewById(R.id.changeNick)
+        val mastersay : Button = findViewById(R.id.masterSay)
 
         auth = FirebaseAuth.getInstance()
         databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(auth.uid.toString())
@@ -82,6 +85,10 @@ class MyinfoActivity : AppCompatActivity() {
                 }
             })
         }
+        // 문의하기
+        mastersay.setOnClickListener {
+            startActivity(Intent(this, SendMailActivity::class.java))
+        }
         myposting.setOnClickListener {//내가 쓴 글 모아보기
             startActivity(Intent(this, MypostingFragment::class.java))
         }
@@ -100,8 +107,12 @@ class MyinfoActivity : AppCompatActivity() {
                 .setPositiveButton("확인") { dialog, which ->
                     FirebaseAuth.getInstance().currentUser?.delete() // 데이터베이스 이메일 삭제 부분
                     FirebaseDatabase.getInstance().getReference("Users").child(auth.uid.toString()).removeValue()
-                    startActivity(Intent(this,LoginActivity::class.java))
-                    finish()
+                    FirebaseDatabase.getInstance().getReference("Tokens").child(auth.uid.toString()).removeValue()
+//                    moveTaskToBack(true);						// 태스크를 백그라운드로 이동
+//                    finishAndRemoveTask();						// 액티비티 종료 + 태스크 리스트에서 지우기
+//                    android.os.Process.killProcess(android.os.Process.myPid());	// 앱 프로세스 종료
+                    ActivityCompat.finishAffinity(this);
+                    System.exit(0)
                 }
                 .setNegativeButton("취소",null)
             checkbox.show()
