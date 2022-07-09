@@ -1,3 +1,5 @@
 package com.example.cpas.planner
 
-data class planData(val title : String, val time : String)
+import android.graphics.Color
+
+data class planData(val title : String, val time : String, val color: String)

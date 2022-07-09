@@ -1,13 +1,16 @@
 package com.example.cpas.planner
 
 import android.app.DatePickerDialog
-import android.content.ClipData
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.DragEvent
 import android.view.View
 import android.view.View.*
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -17,7 +20,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.cpas.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import org.w3c.dom.Text
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -28,7 +30,7 @@ class PlannerActivity : AppCompatActivity() {
     var month = 0
     var day = 0
     lateinit var planAdapter : PlannerAdapter
-    var planDataList = mutableListOf<String>()
+    var planDataList = mutableListOf<planData>()
     private lateinit var auth: FirebaseAuth // 파이어 베이스 형식
     private lateinit var databaseReference: DatabaseReference
 
@@ -41,6 +43,8 @@ class PlannerActivity : AppCompatActivity() {
         val planGraph : View = findViewById(R.id.plannerGraph)
         val pickdate : TextView = findViewById(R.id.pickdate)
         var id = intent.getStringExtra("id")
+        var canvasView : CanvasView = findViewById(R.id.paintView)
+        var eventText = ""
 
         val sdf = SimpleDateFormat("yyyy/MM/dd")
         val time : String = sdf.format(Date())
@@ -52,6 +56,9 @@ class PlannerActivity : AppCompatActivity() {
         pickdate.text = nowdate
         auth = FirebaseAuth.getInstance()
         databaseReference = FirebaseDatabase.getInstance().getReference("Plan").child(id.toString())
+
+        //+버튼 데이터 클래스
+        val plus_dataclass = planData("+", "0", "0")
 
 
         //달력 버튼
@@ -65,21 +72,17 @@ class PlannerActivity : AppCompatActivity() {
         planListView.layoutManager = gridLayoutManager
         planAdapter = PlannerAdapter(this, this)
         planListView.adapter = planAdapter
-        planDataList.add("+")
+        planDataList.add(plus_dataclass)
         planAdapter.planList = planDataList
-        val data = mapOf<String, String>(
-            "title" to "이거테스트",
-            "time" to "0"
-        )
 
         databaseReference.child(nowdate).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 planDataList.clear()
                 for(data in snapshot.children){
-                    planDataList.add(data.child("title").value.toString())
+                    planDataList.add(planData(data.child("title").value.toString(), data.child("time").value.toString(), data.child("color").value.toString()))
                     Log.d("TAg", planDataList.toString())
                 }
-                planDataList.add("+")
+                planDataList.add(plus_dataclass)
                 planListView.adapter?.notifyDataSetChanged()
 
             }
@@ -112,10 +115,10 @@ class PlannerActivity : AppCompatActivity() {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         planDataList.clear()
                         for(data in snapshot.children){
-                            planDataList.add(data.child("title").value.toString())
+                            planDataList.add(planData(data.child("title").value.toString(), data.child("time").value.toString(), data.child("color").value.toString()))
                             Log.d("TAg", planDataList.toString())
                         }
-                        planDataList.add("+")
+                        planDataList.add(plus_dataclass)
                         planListView.adapter?.notifyDataSetChanged()
 
                     }
@@ -149,13 +152,33 @@ class PlannerActivity : AppCompatActivity() {
                         }
                     }
                     if(flag){
-                        include_planlist.add(event.clipData.getItemAt(0).text.toString())
+                        eventText = event.clipData.getItemAt(0).text.toString()
+                        include_planlist.add(eventText)
                         var temptext = ""
                         for(i in 0 .. include_planlist.size - 1){
                             temptext += include_planlist.get(i)
                             temptext += ", "
                         }
                         include_plan.text = "현재 : " + temptext
+                        //----- 비효율 적인 방법 추후 수정 예정---------------
+                        databaseReference.child(nowdate).addValueEventListener(object : ValueEventListener {
+                            override fun onDataChange(snapshot: DataSnapshot) {
+                                planDataList.clear()
+                                for(data in snapshot.children){
+                                    if(eventText.equals(data.child("title").value.toString())){
+                                        canvasView.addlist(planData(data.child("title").value.toString(), data.child("time").value.toString(), data.child("color").value.toString()))
+                                        canvasView.redraw()
+                                    }
+                                }
+
+                            }
+
+                            override fun onCancelled(error: DatabaseError) {
+                            }
+
+                        })
+                        //--------------------------------------------------
+
                     }
                     flag = true
                 }
