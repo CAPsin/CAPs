@@ -17,6 +17,7 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.viewpager.widget.ViewPager
 import com.example.cpas.home.*
+import com.example.cpas.login.LoginActivity
 import com.example.cpas.planner.PlannerActivity
 import com.example.cpas.posting.WritingActivity
 import com.example.cpas.profile.MyinfoActivity
