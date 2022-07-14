@@ -31,8 +31,8 @@ class SendMailActivity : AppCompatActivity() {
 
         post.setOnClickListener {
             //sendEmail(content.text.toString(),title.text.toString())
-            val email = "a22950973@gmail.com"
-            GMailSender(content.text.toString(),title.text.toString()).sendEmail(email)
+            //val email = "a22950973@gmail.com"
+            //GMailSender(content.text.toString(),title.text.toString()).sendEmail(email)
             Toast.makeText(applicationContext, "이메일을 성공적으로 보냈습니다.", Toast.LENGTH_SHORT).show()
             finish()
         }
@@ -42,22 +42,21 @@ class SendMailActivity : AppCompatActivity() {
         }
     }
     private fun sendEmail(content: String, title: String) {
-        val emailAddress = "a22950973@gmail.com"
+       // val emailAddress = "a22950973@gmail.com"
 
-        val intent = Intent(Intent.ACTION_SENDTO)
-            .apply {
-                type = "text/plain" // 데이터 타입 설정
-                data = Uri.parse("mailto:")
+       // val intent = Intent(Intent.ACTION_SENDTO)
+            //.apply {
+              //  type = "text/plain" // 데이터 타입 설정
+              //  data = Uri.parse("mailto:")
 
-                putExtra(Intent.EXTRA_EMAIL, emailAddress) // 메일 수신 주소 목록
-                putExtra(Intent.EXTRA_SUBJECT, title) // 메일 제목 설정
-                putExtra(Intent.EXTRA_TEXT, content) // 메일 본문 설정
-            }
+               // putExtra(Intent.EXTRA_EMAIL, emailAddress) // 메일 수신 주소 목록
+               // putExtra(Intent.EXTRA_SUBJECT, title) // 메일 제목 설정
+               // putExtra(Intent.EXTRA_TEXT, content) // 메일 본문 설정
+            //}
+        val emailIntent = Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", "a22950973@gmail.com", null))
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, title)
+        emailIntent.putExtra(Intent.EXTRA_TEXT, content)
+        startActivity(Intent.createChooser(emailIntent, ""))
 
-        if (intent.resolveActivity(packageManager) != null) {
-            startActivity(intent)
-        } else {
-            Toast.makeText(this, "메일을 전송할 수 없습니다", Toast.LENGTH_LONG).show()
-        }
     }
 }
