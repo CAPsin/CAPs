@@ -95,11 +95,16 @@ class WritingActivity : AppCompatActivity() {
                 database = FirebaseDatabase.getInstance().getReference("Postings")
                 val posting = Posting(writerUid, id, type, tmp, tmp2, time, commentNum, who, R.drawable.comment, currentTimeMillis().toString(), postingID)
                 database.child(postingID).setValue(posting).addOnSuccessListener {
+                    var flag = 0
                     for (index in 0..14) { // 파이어베이스에 카테고리도 추가하기
                         if(selected[index]) {
 //                            val toggle: ToggleButton = findViewById(toggleID[index])
                             database.child(postingID).child("category").child(index.toString()).setValue(toggleText[index])
+                            flag = 1
                         }
+                    }
+                    if(flag == 0) {
+                        database.child(postingID).child("category").child("-1").setValue("NONE")
                     }
                     Toast.makeText(applicationContext, "글을 업로드 하였습니다", Toast.LENGTH_SHORT).show()
                     finish()
