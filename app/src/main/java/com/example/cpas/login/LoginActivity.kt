@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
 import com.example.cpas.MainActivity
@@ -32,7 +33,7 @@ class LoginActivity : AppCompatActivity() {
         val inputid : EditText = findViewById(R.id.EditId)
         val inputpass : EditText = findViewById(R.id.EditPassword)
         val loginbtn = findViewById<AppCompatButton>(R.id.LoginButton)
-        val assignbtn = findViewById<AppCompatButton>(R.id.AssignButton)
+        val assignbtn = findViewById<TextView>(R.id.AssignButton)
 
         loginbtn.setOnClickListener {
             //TODO 유저 데이터 정보를 가져와서 로그인 정보 확인
