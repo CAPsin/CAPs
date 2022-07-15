@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/timetablayout"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="match_parent"
+        app:tabIndicatorColor="#6667AB"
+        app:tabGravity="fill"
+        app:tabMode="fixed"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/setstartTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="시작 시간"/>
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/setendTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="종료 시간"/>
+
+    </com.google.android.material.tabs.TabLayout>
+
+    <TimePicker
+        android:id="@+id/timespinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:timePickerMode="spinner"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/timetablayout"/>
+
+    <TextView
+        android:id="@+id/time_cancle_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/timespinner"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="20dp"
+        android:text="취소"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"
+        android:textColor="#6667AB"/>
+
+    <TextView
+        android:id="@+id/time_ok_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/timespinner"
+        app:layout_constraintEnd_toStartOf="@id/time_cancle_button"
+        android:layout_marginEnd="20dp"
+        android:text="확인"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"
+        android:textColor="#6667AB"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        app:layout_constraintTop_toBottomOf="@id/time_cancle_button"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
