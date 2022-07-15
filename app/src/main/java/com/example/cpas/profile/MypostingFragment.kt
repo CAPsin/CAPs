@@ -25,23 +25,25 @@ class MypostingFragment : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.myposting_fragment)
 
-        val viewPager: ViewPager = findViewById(R.id.viewPager)
-        val tabLayout: TabLayout = findViewById(R.id.tabLayout)
+        val viewPager : ViewPager = findViewById(R.id.viewPager)
+        val tabLayout : TabLayout = findViewById(R.id.tabLayout)
 
         val pageradapter = PagerAdapter(supportFragmentManager)
-        pageradapter.addFragment(
-            MyJobFragment(
-                //오류
-                intent.getStringExtra("name")!!,
-                intent.getStringExtra("id")!!
-            )
-        )
-        pageradapter.addFragment(
-            MyNormalFragment(
-                intent.getStringExtra("name")!!,
-                intent.getStringExtra("id")!!
-            )
-        )
+
+        val jobFrag = MyJobFragment()
+        val normalFrag = MyNormalFragment()
+        val id = intent.getStringExtra("id")!!
+        val nickname = intent.getStringExtra("who")!!
+        val bundle = Bundle(2)
+        bundle.putString("param1", nickname)
+        bundle.putString("param2", id)
+
+        jobFrag.arguments = bundle
+        normalFrag.arguments = bundle
+
+        pageradapter.addFragment(jobFrag)
+        pageradapter.addFragment(normalFrag)
+
         viewPager.adapter = pageradapter
         tabLayout.setupWithViewPager(viewPager)
     }

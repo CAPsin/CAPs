@@ -16,14 +16,24 @@ import com.google.firebase.database.*
 import kotlin.Comparator
 import kotlin.collections.ArrayList
 
-class MyNormalFragment(val who : String, val id : String) : Fragment() {
+class MyNormalFragment() : Fragment() {
     private lateinit var auth : FirebaseAuth
     private lateinit var database : DatabaseReference
     private lateinit var array : ArrayList<Posting>
+    private var who: String? = null
+    private var id: String? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            who = it.getString("param1")
+            id = it.getString("param2")
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.normal_fragment, container, false)
-
+        auth =  FirebaseAuth.getInstance()
         array = ArrayList()
         val rv = view.findViewById<RecyclerView>(R.id.rv_posting2)
         database = FirebaseDatabase.getInstance().getReference("Postings")
@@ -31,7 +41,7 @@ class MyNormalFragment(val who : String, val id : String) : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 array.clear()
                 for(data in snapshot.children) {
-                    if(data.child("type").value as String == "normal" && auth?.currentUser?.email == data.child("email").value as String) {
+                    if(data.child("type").value as String == "normal" && data.child("writerUid").value as String == auth.currentUser!!.uid) {
                         val id = data.child("id").value as String
                         val title = data.child("title").value as String
                         val content = data.child("content").value as String
@@ -59,7 +69,7 @@ class MyNormalFragment(val who : String, val id : String) : Fragment() {
 
         rv.layoutManager = LinearLayoutManager(null)
         rv.setHasFixedSize(true)
-        rv.adapter = PostingAdapter(array, who, id)
+        rv.adapter = PostingAdapter(array, who!!, id!!)
 
         return view
     }

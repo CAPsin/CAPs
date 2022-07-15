@@ -220,8 +220,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 finish()
             }
             R.id.bottom_myinfo -> {
-                val intent = Intent(this, MyinfoActivity::class.java)
-                startActivity(intent)
+                val intent1 = Intent(this, MyinfoActivity::class.java)
+                intent1.putExtra("flag", flag)
+                intent1.putExtra("id", intent.getStringExtra("id"))
+                intent1.putExtra("who", intent.getStringExtra("nickname"))
+                startActivity(intent1)
             }
         }
         val drawer : DrawerLayout = findViewById(R.id.layout_drawer)
