@@ -7,6 +7,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.DragEvent
+import android.view.MotionEvent
 import android.view.View
 import android.view.View.*
 import android.widget.ImageButton
@@ -132,7 +133,16 @@ class PlannerActivity : AppCompatActivity() {
             DatePickerDialog(this, dateSetListener, year,month,day).show()
         }
 
-        planGraph.setOnDragListener(OnDragListener { v, event -> // TODO Auto-generated method stub
+        canvasView.setOnTouchListener { view, motionEvent ->
+            Log.d("터치 나의 좌표", "${motionEvent.x} , ${motionEvent.y}")
+            Log.d("결과느,ㄴ?", "${canvasView.inthere(motionEvent.x.toDouble() - 366,
+                motionEvent.y.toDouble() - 366
+            )}")
+            canvasView.sivalTest(motionEvent.x.toDouble(), motionEvent.y.toDouble())
+            return@setOnTouchListener true
+        }
+
+        canvasView.setOnDragListener(OnDragListener { v, event -> // TODO Auto-generated method stub
             val action = event.action
             when (action) {
                 DragEvent.ACTION_DRAG_STARTED -> {
@@ -163,7 +173,6 @@ class PlannerActivity : AppCompatActivity() {
                         //----- 비효율 적인 방법 추후 수정 예정---------------
                         databaseReference.child(nowdate).addValueEventListener(object : ValueEventListener {
                             override fun onDataChange(snapshot: DataSnapshot) {
-                                planDataList.clear()
                                 for(data in snapshot.children){
                                     if(eventText.equals(data.child("title").value.toString())){
                                         canvasView.addlist(planData(data.child("title").value.toString(), data.child("time").value.toString(), data.child("color").value.toString()))
