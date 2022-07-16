@@ -217,7 +217,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 val intent1 = Intent(this, PlannerActivity::class.java)
                 intent1.putExtra("id", intent.getStringExtra("id"))
                 startActivity(intent1)
-                finish()
             }
             R.id.bottom_myinfo -> {
                 val intent = Intent(this, MyinfoActivity::class.java)

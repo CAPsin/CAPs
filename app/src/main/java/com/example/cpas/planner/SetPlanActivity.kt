@@ -1,15 +1,14 @@
 package com.example.cpas.planner
 
+import android.graphics.Color
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.DatePicker
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.Toast
+import android.widget.*
 import androidx.annotation.RequiresApi
 import com.example.cpas.R
+import com.example.cpas.home.CategoryDialog
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -60,20 +59,34 @@ class SetPlanActivity : AppCompatActivity() {
             if (editplan.text.toString().equals("")) {
                 Toast.makeText(this, "할 일을 입력해주세요!", Toast.LENGTH_SHORT).show()
             } else {
-                val data = mapOf<String, String>(
-                    "title" to editplan.text.toString(),
-                    "time" to "0",
-                    "color" to (1..10).random().toString()
+                val layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
                 )
 
 
-                databaseReference.child(dateString).child(editplan.text.toString())
-                    .updateChildren(data).addOnSuccessListener {
-                        finish()
+                val dialog = SetTimeDialog(this) // 카테고리 다이얼로그 액티비티 받기
 
-                }.addOnFailureListener {
-                    Toast.makeText(this, "실패", Toast.LENGTH_SHORT).show()
-                }
+                dialog.showDialog()
+                dialog.setOnClickListener(object : SetTimeDialog.OnDialogClickListener {
+                    override fun onClicked(time: String) {
+                        val data = mapOf<String, String>(
+                            "title" to editplan.text.toString(),
+                            "time" to time,
+                            "color" to (1..10).random().toString()
+                        )
+                        databaseReference.child(dateString).child(editplan.text.toString())
+                            .updateChildren(data).addOnSuccessListener {
+                                finish()
+
+                            }.addOnFailureListener {
+                                Toast.makeText(applicationContext, "실패", Toast.LENGTH_SHORT).show()
+                            }
+                        layoutParams.setMargins(changeDP(5), changeDP(12), changeDP(5), 0)
+                    }
+
+                })
+
 
             }
         }
@@ -82,6 +95,12 @@ class SetPlanActivity : AppCompatActivity() {
             finish()
         }
 
+    }
+
+    private fun changeDP(value: Int): Int {
+        var displayMetrics = resources.displayMetrics
+        var dp = Math.round(value * displayMetrics.density)
+        return dp
     }
 
 

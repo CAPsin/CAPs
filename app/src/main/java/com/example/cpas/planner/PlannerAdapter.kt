@@ -76,6 +76,7 @@ class PlannerAdapter(private val context: Context, private val plannerActivity: 
 
 
         holder.itemView.setOnClickListener {  // TODO Auto-generated method stub
+            Log.d("TAG", "planlistsize : ${planList.size}")
             if (position == planList.size - 1) {
                 val intent = Intent(context, SetPlanActivity::class.java)
                 intent.putExtra("id", userId)
