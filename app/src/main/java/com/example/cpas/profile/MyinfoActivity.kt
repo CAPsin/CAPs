@@ -90,7 +90,10 @@ class MyinfoActivity : AppCompatActivity() {
             startActivity(Intent(this, SendMailActivity::class.java))
         }
         myposting.setOnClickListener {//내가 쓴 글 모아보기
-            startActivity(Intent(this, MypostingFragment::class.java))
+            val intent1 = Intent(this, MypostingFragment::class.java)
+            intent1.putExtra("id", intent.getStringExtra("id"))
+            intent1.putExtra("who", intent.getStringExtra("who"))
+            startActivity(intent1)
         }
         logout.setOnClickListener {//로그아웃
             auth.signOut()
