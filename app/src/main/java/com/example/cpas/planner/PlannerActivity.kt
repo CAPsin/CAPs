@@ -138,7 +138,7 @@ class PlannerActivity : AppCompatActivity() {
             Log.d("결과느,ㄴ?", "${canvasView.inthere(motionEvent.x.toDouble() - 366,
                 motionEvent.y.toDouble() - 366
             )}")
-            canvasView.sivalTest(motionEvent.x.toDouble(), motionEvent.y.toDouble())
+            canvasView.inthere(motionEvent.x.toDouble(), motionEvent.y.toDouble())
             return@setOnTouchListener true
         }
 
