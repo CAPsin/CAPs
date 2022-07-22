@@ -45,7 +45,7 @@ class SetTimeDialog (context: Context){
         setTimePickerInterval(timePicker)
         timePicker.setOnTimeChangedListener { timePicker, hour, minute ->
             Log.d("TAGME", "현재 설정된 시간은 ${hour} : ${minute * Time_Interval}")
-            change_time = "${hour}/${minute}"
+            change_time = "${hour}/${minute * Time_Interval}"
         }
 
         val timetablayout : TabLayout = dialog.findViewById(R.id.timetablayout)
@@ -93,6 +93,7 @@ class SetTimeDialog (context: Context){
     {
         fun onClicked(time: String)
     }
+
 
     private fun setTimePickerInterval(timePicker: TimePicker) {
         try {

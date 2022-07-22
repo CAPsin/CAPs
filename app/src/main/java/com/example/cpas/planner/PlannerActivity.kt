@@ -10,10 +10,7 @@ import android.view.DragEvent
 import android.view.MotionEvent
 import android.view.View
 import android.view.View.*
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.cpas.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import kotlinx.android.synthetic.main.activity_myinfo.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -30,7 +28,7 @@ class PlannerActivity : AppCompatActivity() {
     var year = 0
     var month = 0
     var day = 0
-    lateinit var planAdapter : PlannerAdapter
+    lateinit var planAdapter: PlannerAdapter
     var planDataList = mutableListOf<planData>()
     private lateinit var auth: FirebaseAuth // 파이어 베이스 형식
     private lateinit var databaseReference: DatabaseReference
@@ -40,15 +38,15 @@ class PlannerActivity : AppCompatActivity() {
         setContentView(R.layout.activity_planner)
         var include_planlist = arrayListOf<String>()
         var flag = true
-        var include_plan : TextView = findViewById(R.id.include_plan)
-        val planGraph : View = findViewById(R.id.plannerGraph)
-        val pickdate : TextView = findViewById(R.id.pickdate)
+        var include_plan: TextView = findViewById(R.id.include_plan)
+        val planGraph: View = findViewById(R.id.plannerGraph)
+        val pickdate: TextView = findViewById(R.id.pickdate)
         var id = intent.getStringExtra("id")
-        var canvasView : CanvasView = findViewById(R.id.paintView)
+        var canvasView: CanvasView = findViewById(R.id.paintView)
         var eventText = ""
 
         val sdf = SimpleDateFormat("yyyy/MM/dd")
-        val time : String = sdf.format(Date())
+        val time: String = sdf.format(Date())
         val nowdates = time.split("/")
         var nowdate = "${nowdates[0]}년 ${nowdates[1]}월 ${nowdates[2]}일"
         year = nowdates[0].toInt()
@@ -79,8 +77,14 @@ class PlannerActivity : AppCompatActivity() {
         databaseReference.child(nowdate).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 planDataList.clear()
-                for(data in snapshot.children){
-                    planDataList.add(planData(data.child("title").value.toString(), data.child("time").value.toString(), data.child("color").value.toString()))
+                for (data in snapshot.children) {
+                    planDataList.add(
+                        planData(
+                            data.child("title").value.toString(),
+                            data.child("time").value.toString(),
+                            data.child("color").value.toString()
+                        )
+                    )
                     Log.d("TAg", planDataList.toString())
                 }
                 planDataList.add(plus_dataclass)
@@ -95,90 +99,40 @@ class PlannerActivity : AppCompatActivity() {
 
         calendarButton.setOnClickListener {
             val cal = Calendar.getInstance() // 캘린더 뷰
-            val dateSetListener = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-                if (month + 1 < 10 && dayOfMonth < 10) {
-                    dateString = "${year}년 0${month + 1}월 0${dayOfMonth}일"
-                } else if (month + 1 < 10) {
-                    dateString = "${year}년 0${month + 1}월 ${dayOfMonth}일"
-                } else if (dayOfMonth < 10) {
-                    dateString = "${year}년 ${month + 1}월 0${dayOfMonth}일"
-                } else {
-                    dateString = "${year}년 ${month + 1}월 ${dayOfMonth}일"
-                }
-                this.year = year
-                this.month = month
-                day = dayOfMonth
-                 Log.d("TAG","날짜 : "+dateString)
-                nowdate = dateString
-                pickdate.text = nowdate
-
-                databaseReference.child(nowdate).addValueEventListener(object : ValueEventListener {
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        planDataList.clear()
-                        for(data in snapshot.children){
-                            planDataList.add(planData(data.child("title").value.toString(), data.child("time").value.toString(), data.child("color").value.toString()))
-                            Log.d("TAg", planDataList.toString())
-                        }
-                        planDataList.add(plus_dataclass)
-                        planListView.adapter?.notifyDataSetChanged()
-
+            val dateSetListener =
+                DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+                    if (month + 1 < 10 && dayOfMonth < 10) {
+                        dateString = "${year}년 0${month + 1}월 0${dayOfMonth}일"
+                    } else if (month + 1 < 10) {
+                        dateString = "${year}년 0${month + 1}월 ${dayOfMonth}일"
+                    } else if (dayOfMonth < 10) {
+                        dateString = "${year}년 ${month + 1}월 0${dayOfMonth}일"
+                    } else {
+                        dateString = "${year}년 ${month + 1}월 ${dayOfMonth}일"
                     }
+                    this.year = year
+                    this.month = month
+                    day = dayOfMonth
+                    Log.d("TAG", "날짜 : " + dateString)
+                    nowdate = dateString
+                    pickdate.text = nowdate
 
-                    override fun onCancelled(error: DatabaseError) {
-                    }
-
-                })
-
-            }
-            DatePickerDialog(this, dateSetListener, year,month,day).show()
-        }
-
-        canvasView.setOnTouchListener { view, motionEvent ->
-            Log.d("터치 나의 좌표", "${motionEvent.x} , ${motionEvent.y}")
-            Log.d("결과느,ㄴ?", "${canvasView.inthere(motionEvent.x.toDouble() - 366,
-                motionEvent.y.toDouble() - 366
-            )}")
-            canvasView.sivalTest(motionEvent.x.toDouble(), motionEvent.y.toDouble())
-            return@setOnTouchListener true
-        }
-
-        canvasView.setOnDragListener(OnDragListener { v, event -> // TODO Auto-generated method stub
-            val action = event.action
-            when (action) {
-                DragEvent.ACTION_DRAG_STARTED -> {
-                }
-                DragEvent.ACTION_DRAG_EXITED -> {
-                    Log.d("TAG","나감")
-                }
-                DragEvent.ACTION_DRAG_ENTERED -> { // 드래그 실패
-                    Log.d("TAG","들어옴")
-                }
-                DragEvent.ACTION_DROP -> { // 드래그 성공
-                    Log.d("TAG",event.clipData.getItemAt(0).text.toString())
-                    for(i in 0 .. include_planlist.size - 1){
-                        if((event.clipData.getItemAt(0).text.toString()).equals(include_planlist.get(i))){
-                            Toast.makeText(this,"이미 존재하는 계획입니다.", Toast.LENGTH_SHORT).show()
-                            flag = false
-                        }
-                    }
-                    if(flag){
-                        eventText = event.clipData.getItemAt(0).text.toString()
-                        include_planlist.add(eventText)
-                        var temptext = ""
-                        for(i in 0 .. include_planlist.size - 1){
-                            temptext += include_planlist.get(i)
-                            temptext += ", "
-                        }
-                        include_plan.text = "현재 : " + temptext
-                        //----- 비효율 적인 방법 추후 수정 예정---------------
-                        databaseReference.child(nowdate).addValueEventListener(object : ValueEventListener {
+                    databaseReference.child(nowdate)
+                        .addValueEventListener(object : ValueEventListener {
                             override fun onDataChange(snapshot: DataSnapshot) {
-                                for(data in snapshot.children){
-                                    if(eventText.equals(data.child("title").value.toString())){
-                                        canvasView.addlist(planData(data.child("title").value.toString(), data.child("time").value.toString(), data.child("color").value.toString()))
-                                        canvasView.redraw()
-                                    }
+                                planDataList.clear()
+                                for (data in snapshot.children) {
+                                    planDataList.add(
+                                        planData(
+                                            data.child("title").value.toString(),
+                                            data.child("time").value.toString(),
+                                            data.child("color").value.toString()
+                                        )
+                                    )
+                                    Log.d("TAg", planDataList.toString())
                                 }
+                                planDataList.add(plus_dataclass)
+                                planListView.adapter?.notifyDataSetChanged()
 
                             }
 
@@ -186,6 +140,123 @@ class PlannerActivity : AppCompatActivity() {
                             }
 
                         })
+
+                }
+            DatePickerDialog(this, dateSetListener, year, month, day).show()
+        }
+
+        canvasView.setOnTouchListener { view, motionEvent ->
+            Log.d("터치 나의 좌표", "${motionEvent.x} , ${motionEvent.y}")
+            Log.d(
+                "결과느,ㄴ?", "${
+                    canvasView.inthere(
+                        motionEvent.x.toDouble() - 366,
+                        motionEvent.y.toDouble() - 366
+                    )
+                }"
+            )
+            if (motionEvent.action == 0) {
+                if (canvasView.inthere(
+                        motionEvent.x.toDouble() - 366,
+                        motionEvent.y.toDouble() - 366
+                    ) != null
+                ) {
+                    val dataString = canvasView.inthere(
+                        motionEvent.x.toDouble() - 366,
+                        motionEvent.y.toDouble() - 366
+                    )
+                    val layoutParams = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                    )
+
+
+                    val dialog = SetTimeDialog(this) // 카테고리 다이얼로그 액티비티 받기
+
+                    dialog.showDialog()
+                    dialog.setOnClickListener(object : SetTimeDialog.OnDialogClickListener {
+                        override fun onClicked(time: String) {
+                            val data = mapOf<String, String>(
+                                "time" to time
+                            )
+                            databaseReference.child(nowdate).child(dataString.toString())
+                                .updateChildren(data).addOnSuccessListener {
+                                    canvasView.changeThisTime(dataString.toString(), time)
+                                    finish()
+
+                                }.addOnFailureListener {
+                                    Toast.makeText(applicationContext, "실패", Toast.LENGTH_SHORT)
+                                        .show()
+                                }
+                            layoutParams.setMargins(changeDP(5), changeDP(12), changeDP(5), 0)
+                        }
+
+                    })
+                    canvasView.redraw()
+                }
+
+
+            }
+            return@setOnTouchListener true
+        }
+
+
+        canvasView.setOnDragListener(OnDragListener { v, event -> // TODO Auto-generated method stub
+            val action = event.action
+            when (action) {
+                DragEvent.ACTION_DRAG_STARTED -> {
+                }
+                DragEvent.ACTION_DRAG_EXITED -> {
+                    Log.d("TAG", "나감")
+                }
+                DragEvent.ACTION_DRAG_ENTERED -> { // 드래그 실패
+                    Log.d("TAG", "들어옴")
+                }
+                DragEvent.ACTION_DROP -> { // 드래그 성공
+                    Log.d("TAG", event.clipData.getItemAt(0).text.toString())
+                    for (i in 0..include_planlist.size - 1) {
+                        if ((event.clipData.getItemAt(0).text.toString()).equals(
+                                include_planlist.get(
+                                    i
+                                )
+                            )
+                        ) {
+                            Toast.makeText(this, "이미 존재하는 계획입니다.", Toast.LENGTH_SHORT).show()
+                            flag = false
+                        }
+                    }
+                    if (flag) {
+                        eventText = event.clipData.getItemAt(0).text.toString()
+                        include_planlist.add(eventText)
+                        var temptext = ""
+                        for (i in 0..include_planlist.size - 1) {
+                            temptext += include_planlist.get(i)
+                            temptext += ", "
+                        }
+                        include_plan.text = "현재 : " + temptext
+                        //----- 비효율 적인 방법 추후 수정 예정---------------
+                        databaseReference.child(nowdate)
+                            .addValueEventListener(object : ValueEventListener {
+                                override fun onDataChange(snapshot: DataSnapshot) {
+                                    for (data in snapshot.children) {
+                                        if (eventText.equals(data.child("title").value.toString())) {
+                                            canvasView.addlist(
+                                                planData(
+                                                    data.child("title").value.toString(),
+                                                    data.child("time").value.toString(),
+                                                    data.child("color").value.toString()
+                                                )
+                                            )
+                                            canvasView.redraw()
+                                        }
+                                    }
+
+                                }
+
+                                override fun onCancelled(error: DatabaseError) {
+                                }
+
+                            })
                         //--------------------------------------------------
 
                     }
@@ -200,5 +271,12 @@ class PlannerActivity : AppCompatActivity() {
             true
         })
     }
+
+    private fun changeDP(value: Int): Int {
+        var displayMetrics = resources.displayMetrics
+        var dp = Math.round(value * displayMetrics.density)
+        return dp
+    }
+
 
 }

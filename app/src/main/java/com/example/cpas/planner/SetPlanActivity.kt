@@ -27,6 +27,7 @@ class SetPlanActivity : AppCompatActivity() {
         setContentView(R.layout.activity_set_plan)
 
         var id = intent.getStringExtra("id")
+        var count = 0
 
         auth = FirebaseAuth.getInstance()
         databaseReference =
@@ -73,8 +74,9 @@ class SetPlanActivity : AppCompatActivity() {
                         val data = mapOf<String, String>(
                             "title" to editplan.text.toString(),
                             "time" to time,
-                            "color" to (1..10).random().toString()
+                            "color" to count.toString()
                         )
+                        count++
                         databaseReference.child(dateString).child(editplan.text.toString())
                             .updateChildren(data).addOnSuccessListener {
                                 finish()
