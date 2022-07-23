@@ -20,6 +20,7 @@ class CanvasView @JvmOverloads constructor(
 ) : View(context, attrs, defStyleAttr) {
 
     var list = arrayListOf<planData>()
+    var drawlist = arrayListOf<ArcData>()
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
@@ -44,32 +45,96 @@ class CanvasView @JvmOverloads constructor(
                 9 -> paint.setColor(Color.parseColor("#EECCE5"))
                 10 -> paint.setColor(Color.parseColor("#FFFFDD"))
             }
-            canvas?.drawArc(rect, 0f + i.toFloat() * 30f, 30f, true, paint)
+            drawlist[i].draw(canvas, paint)
+
         }
 
         //우리 테스트 원의 크기 알기
-        Log.d("TAG", canvas?.width.toString() + " " + canvas?.height.toString())
+        //Log.d("TAG", canvas?.width.toString() + " " + canvas?.height.toString())
     }
+
 
     fun redraw() {
         invalidate()
     }
 
+    fun changeThisTime(timeset: String, name: String){
+        for (i in 0..drawlist.size - 1) {
+            if(drawlist[i].title.equals(name)){
+                drawlist[i].changeTime(timeset)
+            }
+        }
+    }
+
     fun addlist(test: planData) {
         list.add(test)
+        drawlist.add(ArcData(test.title,test.time, this))
         //테스트용 로그 찍기
         for (i in 0..list.size - 1) {
             Log.d("TOAASD", list.get(i).toString())
         }
     }
 
+    fun inthere(xpos : Double, ypos : Double) : String? {
+
+        for(i in 0..drawlist.size -1 ){
+             if(drawlist[i].inthere(xpos, ypos)){
+                 return drawlist[i].title
+             }
+        }
+
+        return null
+    }
+
+}
+
+class ArcData(var title : String, var time : String, val canvasView: CanvasView){
+
+    var timelist = time.split("@")
+    var starttime = timelist[0]
+    var endtime = timelist[1]
+
+    var starttimelist = starttime.split("/")
+    var endtimelist = endtime.split("/")
+
+    var realStartTime = starttimelist[0].toDouble()*60 + starttimelist[1].toDouble()
+    var realEndTime = endtimelist[0].toDouble()*60 + endtimelist[1].toDouble()
+
+    var startRange = (realStartTime / 5 * 1.25).toFloat() - 90f
+    var swipeAngle = realEndTime - realStartTime
+
+    fun changeTime(timeset : String){
+        time = timeset
+    }
+
+    fun draw(canvas: Canvas?, paint: Paint){
+        var rect = RectF();
+        rect.set(0f, 0f, 732f, 732f);
+        if(realEndTime < realStartTime){
+            canvas?.drawArc(rect, startRange,
+                ((swipeAngle + 1440) / 5 * 1.25).toFloat(), true, paint)
+        }
+        else{
+            canvas?.drawArc(rect, startRange,
+                (swipeAngle / 5 * 1.25).toFloat(), true, paint)
+        }
+        canvasView.redraw()
+    }
+
     fun inthere(xpos : Double, ypos : Double) :Boolean{
-        Log.d("PITEST", "${tan(PI / 6)}")
-        Log.d("PITEST X좌표", "${366 * cos(PI / 4) + 366}")
-        Log.d("PITEST Y좌표", "${366 * sin(PI / 4) + 366}")
-        var x = 366 * cos(PI / 4)
-        var y = 366 * sin(PI / 4)
-        var nCount = 0
+        //PI = 180도
+        var x = 0.0 // 부채꼴 중심 벡터의 x좌표
+        var y = 0.0 // 부채꼴 중심 백터의 y좌표
+        if(realEndTime < realStartTime){
+            x = 366 * cos(PI * ((startRange + ((swipeAngle + 1440) / 5 * 1.25) - (((swipeAngle + 1440) / 5 * 1.25) / 2)) /180))
+            y = 366 * sin(PI * ((startRange + ((swipeAngle + 1440) / 5 * 1.25) - (((swipeAngle + 1440) / 5 * 1.25) / 2)) /180))
+        }
+        else{
+            x = 366 * cos(PI * ( (startRange + (swipeAngle / 5 * 1.25) - ((swipeAngle / 5 * 1.25) / 2)) /180))
+            y = 366 * sin(PI * ((startRange + (swipeAngle / 5 * 1.25) - ((swipeAngle / 5 * 1.25) / 2)) /180))
+        }
+       // var x = 366 * cos(PI / 6 / 2)
+      //  var y = 366 * sin(PI / 6 / 2)
         var u: Double
         var v: Double
         var inner: Double
@@ -91,14 +156,23 @@ class CanvasView @JvmOverloads constructor(
             theta = acos(inner / (u * v))
 
             // 만약 두 벡터간의 각이 주어진 각보다 작다면, 이는 범위 내의 적으로 판단
-            if (theta <= PI / 4){
-                return true
+            if(realEndTime < realStartTime){
+                if (theta <= (PI * (((realEndTime +1440- realStartTime) / 5 * 1.25)/180) / 2)){
+                    return true
+                }
+                else{
+                    return false
+                }
             }
             else{
-                return false
+                if (theta <= (PI * (((realEndTime - realStartTime) / 5 * 1.25)/180) / 2)){
+                    return true
+                }
+                else{
+                    return false
+                }
             }
         }
-
     }
 
     fun Vector_size(A1: Double, A2: Double): Double {
@@ -114,6 +188,5 @@ class CanvasView @JvmOverloads constructor(
         distance = sqrt(pow(x, 2.0) + pow(y, 2.0))
         return distance
     }
-
 
 }
