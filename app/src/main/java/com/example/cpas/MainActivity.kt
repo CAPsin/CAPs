@@ -35,6 +35,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
     var flag : String = "job"//ㅇㅇ
     var isUp = false // 카테고리 애니메이션 상태표시
+    lateinit var viewpager : ViewPager
+    lateinit var tab : TabLayout
     lateinit var firebaseInstanceId : FirebaseInstanceId
     lateinit var auth : FirebaseAuth
     lateinit var database : DatabaseReference
@@ -53,8 +55,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val category_plus : ImageButton = findViewById(R.id.btn_cateplus) //카테고리 플러스 버튼
         val category_line : LinearLayout = findViewById(R.id.category_line) //카테고리 삽입하기 위한 부모 레이어
 
-        val viewpager : ViewPager = findViewById(R.id.viewPager)
-        val tab : TabLayout = findViewById(R.id.tabLayout)
+        viewpager = findViewById(R.id.viewPager)
+        tab = findViewById(R.id.tabLayout)
         val category_scollview : HorizontalScrollView = findViewById(R.id.scollview) //카테고리 숨겨진 페이지
 
         val scaleDownAnim : Animation// 카테고리 보여주는 애니메이션
@@ -132,8 +134,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         bottomNav.setOnItemSelectedListener(this)
 
 
-        val viewPager : ViewPager = findViewById(R.id.viewPager)
-        val tabLayout : TabLayout = findViewById(R.id.tabLayout)
+//        val viewPager : ViewPager = findViewById(R.id.viewPager)
+//        val tabLayout : TabLayout = findViewById(R.id.tabLayout)
 
         val pageradapter = PagerAdapter(supportFragmentManager)
 
@@ -151,13 +153,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         pageradapter.addFragment(jobFrag)
         pageradapter.addFragment(normalFrag)
 
-        viewPager.adapter = pageradapter
-        tabLayout.setupWithViewPager(viewPager)
+        viewpager.adapter = pageradapter
+        tab.setupWithViewPager(viewpager)
 
         search.setOnClickListener {
             val intent = Intent(this, SearchActivity::class.java)
             startActivity(intent)
-
         }
 
         sendToken()
@@ -197,6 +198,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when(item.itemId){
             R.id.tmp1 -> {
                 val intent1 = Intent(this, WritingActivity::class.java)
+                if(viewpager.currentItem == 0)
+                    flag = "job"
+                else
+                    flag = "normal"
                 intent1.putExtra("flag", flag)
                 intent1.putExtra("id", intent.getStringExtra("id"))
                 intent1.putExtra("who", intent.getStringExtra("nickname"))
@@ -208,6 +213,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             R.id.bottom_write -> {
                 val intent1 = Intent(this, WritingActivity::class.java)
+                if(viewpager.currentItem == 0)
+                    flag = "job"
+                else
+                    flag = "normal"
                 intent1.putExtra("flag", flag)
                 intent1.putExtra("id", intent.getStringExtra("id"))
                 intent1.putExtra("who", intent.getStringExtra("nickname"))
@@ -220,6 +229,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             R.id.bottom_myinfo -> {
                 val intent1 = Intent(this, MyinfoActivity::class.java)
+                if(viewpager.currentItem == 0)
+                    flag = "job"
+                else
+                    flag = "normal"
                 intent1.putExtra("flag", flag)
                 intent1.putExtra("id", intent.getStringExtra("id"))
                 intent1.putExtra("who", intent.getStringExtra("nickname"))
