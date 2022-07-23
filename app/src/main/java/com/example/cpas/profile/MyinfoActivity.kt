@@ -2,6 +2,7 @@ package com.example.cpas.profile
 
 import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
 import android.os.StrictMode
 import android.widget.*
@@ -40,6 +41,7 @@ class MyinfoActivity : AppCompatActivity() {
         val logout : Button = findViewById(R.id.logout)
         val chageNick : ImageView = findViewById(R.id.changeNick)
         val mastersay : Button = findViewById(R.id.masterSay)
+
 
         auth = FirebaseAuth.getInstance()
         databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(auth.uid.toString())
@@ -87,7 +89,8 @@ class MyinfoActivity : AppCompatActivity() {
         }
         // 문의하기
         mastersay.setOnClickListener {
-            startActivity(Intent(this, SendMailActivity::class.java))
+            sendEmail()
+            finish()
         }
         myposting.setOnClickListener {//내가 쓴 글 모아보기
             val intent1 = Intent(this, MypostingFragment::class.java)
@@ -125,6 +128,19 @@ class MyinfoActivity : AppCompatActivity() {
             finish()
         }
 
+
+    }
+    private fun sendEmail() {
+
+        var emailIntent = Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", "kmj0973@naver.com", null))
+        //emailIntent.putExtra(Intent.EXTRA_SUBJECT, title)
+        //emailIntent.putExtra(Intent.EXTRA_TEXT, content)
+
+        if (intent.resolveActivity(packageManager) != null) {
+            startActivity(Intent.createChooser(emailIntent, "메일 전송하기"))
+        } else {
+            Toast.makeText(this, "메일을 전송할 수 없습니다", Toast.LENGTH_LONG).show()
+        }
 
     }
 }
